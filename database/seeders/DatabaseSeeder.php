@@ -12,10 +12,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@selangor.gov.my',
-            'password' => 'password',
-        ]);
+        User::firstOrCreate(
+            ['email' => 'admin@selangor.gov.my'],
+            [
+                'name' => 'Admin',
+                'password' => 'password',
+            ],
+        );
     }
 }
