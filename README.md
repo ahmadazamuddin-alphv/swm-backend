@@ -1,4 +1,4 @@
-# Siaga Selangor Admin (Laravel + Filament)
+# Selangor Waste Management Admin (Laravel + Filament)
 
 Government / operations backend for the **Illegal Dumping** POC (Hackathon: Siaga Selangor).
 
@@ -68,7 +68,7 @@ Configured in `app/Providers/Filament/AdminPanelProvider.php`:
 |---|---|---|
 | Primary | `#C45C5C` | Soft Selangor red |
 | Warning / accent | `#E8C547` | Soft gold |
-| Brand | Siaga Selangor | Panel branding |
+| Brand | Selangor Waste Management | Panel branding |
 
 ---
 

@@ -27,7 +27,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->brandName('Siaga Selangor')
+            ->brandName('Selangor Waste Management')
             ->colors([
                 // Soft Selangor red (primary) + soft gold (warning/accent)
                 'primary' => Color::hex('#C45C5C'),

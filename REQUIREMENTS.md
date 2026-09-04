@@ -117,7 +117,7 @@ Configured in `app/Providers/Filament/AdminPanelProvider.php`:
 |---|---|---|
 | Primary | `#C45C5C` | Soft Selangor red |
 | Warning / accent | `#E8C547` | Soft gold / yellow |
-| Brand name | Siaga Selangor | Panel branding |
+| Brand name | Selangor Waste Management | Panel branding |
 
 ---
 
