@@ -1,0 +1,82 @@
+/* Selangor Waste Management — soft red + gold accents */
+
+:root {
+    --swm-red: #c45c5c;
+    --swm-red-soft: #f3e0e0;
+    --swm-red-deep: #a84848;
+    --swm-gold: #e8c547;
+    --swm-gold-soft: #f8efc8;
+}
+
+/* Brand */
+.fi-topbar .fi-logo,
+.fi-sidebar-header .fi-logo {
+    color: var(--swm-red) !important;
+    font-weight: 700;
+}
+
+.fi-topbar {
+    border-bottom: 2px solid var(--swm-red-soft) !important;
+}
+
+/* Active sidebar “tab” */
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
+    background-color: var(--swm-red) !important;
+    box-shadow: 0 1px 2px rgb(196 92 92 / 25%);
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-icon,
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-sidebar-item-label {
+    color: #ffffff !important;
+}
+
+.fi-sidebar-item.fi-active
+    > .fi-sidebar-item-btn
+    > .fi-sidebar-item-grouped-border
+    > .fi-sidebar-item-grouped-border-part {
+    background-color: #ffffff !important;
+}
+
+/* Hover on other nav items */
+.fi-sidebar-item-has-url:not(.fi-active) > .fi-sidebar-item-btn:hover {
+    background-color: var(--swm-red-soft) !important;
+}
+
+.fi-sidebar-item-has-url:not(.fi-active) > .fi-sidebar-item-btn:hover > .fi-icon,
+.fi-sidebar-item-has-url:not(.fi-active) > .fi-sidebar-item-btn:hover > .fi-sidebar-item-label {
+    color: var(--swm-red-deep) !important;
+}
+
+/* Group labels */
+.fi-sidebar-group-label {
+    color: var(--swm-red-deep) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em;
+}
+
+/* Page title accent */
+.fi-header-heading {
+    color: var(--swm-red-deep) !important;
+}
+
+/* Soft card polish */
+.fi-wi-stats-overview-stat,
+.fi-section,
+.fi-ta-ctn,
+.fi-wi-table {
+    border-color: var(--swm-red-soft) !important;
+}
+
+.fi-wi-stats-overview-stat {
+    border-top: 3px solid var(--swm-red) !important;
+}
+
+/* Primary buttons already use theme; reinforce */
+.fi-btn.fi-color-primary {
+    --c-400: var(--swm-red);
+}
+
+/* Badges / soft gold hint on warning */
+.fi-badge.fi-color-warning {
+    background-color: var(--swm-gold-soft) !important;
+}

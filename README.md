@@ -5,7 +5,7 @@ Government / operations backend for the **Illegal Dumping** POC (Hackathon: Siag
 | | |
 |---|---|
 | **Stack** | Laravel 12 + Filament 5 + PHP 8.2+ |
-| **Panel** | `/admin` |
+| **Panel** | `/` redirects to `/admin` |
 | **Theme** | Soft Selangor red (`#C45C5C`) + soft gold (`#E8C547`) |
 | **Pairs with** | Next.js citizen app |
 
@@ -18,7 +18,7 @@ Full feature scope: [REQUIREMENTS.md](./REQUIREMENTS.md)
 - PHP 8.2+
 - Composer
 - Node.js + npm (Vite assets)
-- SQLite (default) or MySQL via Laragon
+- MySQL (Laragon) or SQLite
 
 ---
 
@@ -35,9 +35,9 @@ npm install
 copy .env.example .env
 php artisan key:generate
 
-# 3. Database (SQLite by default)
-# Ensure database/database.sqlite exists, or set DB_* in .env for MySQL
+# 3. Database (configure DB_* in .env for MySQL)
 php artisan migrate --seed
+php artisan storage:link
 
 # 4. Run
 npm run build
@@ -47,7 +47,7 @@ php artisan serve
 
 **Admin panel**
 
-- Laragon: [http://swm-backend.test/admin](http://swm-backend.test/admin)
+- Laragon: [http://swm-backend.test](http://swm-backend.test) → `/admin`
 - Artisan serve: [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)
 
 **Default login:** `admin@selangor.gov.my` / `password` (from seeder — change before any shared/production use)
@@ -57,6 +57,29 @@ Optional all-in-one dev processes (server, queue, logs, Vite):
 ```bash
 composer run dev
 ```
+
+Reset demo data:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+---
+
+## Citizen API (Next.js)
+
+Base path: `/api`
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| `GET` | `/api/waste-categories` | List waste types |
+| `GET` | `/api/zones` | List zones + responsible party |
+| `GET` | `/api/responsible-parties` | List parties |
+| `GET` | `/api/reports` | Map pins (`?status=` / `?open_only=1`) |
+| `GET` | `/api/reports/{id}` | Report detail |
+| `POST` | `/api/reports` | Create citizen report (`multipart`: photo/photos, GPS, category, optional `ai_suggestions`) |
+
+No API auth in v1 (POC). Add Sanctum/API keys before production.
 
 ---
 

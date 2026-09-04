@@ -9,7 +9,9 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
+use Filament\Support\Assets\Css;
 use Filament\Support\Colors\Color;
+use Filament\Support\Facades\FilamentAsset;
 use Filament\Widgets\AccountWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -22,6 +24,10 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
+        FilamentAsset::register([
+            Css::make('swm-theme', __DIR__.'/../../../resources/css/filament/swm-theme.css'),
+        ]);
+
         return $panel
             ->default()
             ->id('admin')
@@ -29,7 +35,6 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->brandName('Selangor Waste Management')
             ->colors([
-                // Soft Selangor red (primary) + soft gold (warning/accent)
                 'primary' => Color::hex('#C45C5C'),
                 'warning' => Color::hex('#E8C547'),
                 'danger' => Color::hex('#B84A4A'),
