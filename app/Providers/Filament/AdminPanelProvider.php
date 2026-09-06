@@ -2,14 +2,15 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\OperationsDashboard;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Assets\Css;
+use Filament\Support\Assets\Js;
 use Filament\Support\Colors\Color;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Widgets\AccountWidget;
@@ -25,7 +26,10 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         FilamentAsset::register([
+            Css::make('leaflet', base_path('node_modules/leaflet/dist/leaflet.css')),
             Css::make('swm-theme', __DIR__.'/../../../resources/css/filament/swm-theme.css'),
+            Js::make('leaflet', base_path('node_modules/leaflet/dist/leaflet.js'))->defer(),
+            Js::make('operations-map', resource_path('js/operations-map.js'))->defer(),
         ]);
 
         return $panel
@@ -45,7 +49,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
-                Dashboard::class,
+                OperationsDashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\ReportSource;
 use App\Enums\ReportStatus;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -119,6 +120,30 @@ class Report extends Model
     public function notifications(): HasMany
     {
         return $this->hasMany(AdminNotification::class);
+    }
+
+    public function activities(): HasMany
+    {
+        return $this->hasMany(ReportActivity::class)->latest('id');
+    }
+
+    public function scopeOpen(Builder $query): Builder
+    {
+        return $query->whereNotIn('status', [ReportStatus::Solved->value, ReportStatus::FalseReport->value]);
+    }
+
+    public function isOpen(): bool
+    {
+        return ! in_array($this->status, [ReportStatus::Solved, ReportStatus::FalseReport], true);
+    }
+
+    public function priorityLabel(): string
+    {
+        return match (true) {
+            $this->risk_score >= 80 => 'High risk',
+            $this->risk_score >= 60 => 'Elevated',
+            default => 'Standard',
+        };
     }
 
     public function clearanceHours(): ?float

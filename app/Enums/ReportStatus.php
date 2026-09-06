@@ -2,7 +2,10 @@
 
 namespace App\Enums;
 
-enum ReportStatus: string
+use Filament\Support\Contracts\HasColor;
+use Filament\Support\Contracts\HasLabel;
+
+enum ReportStatus: string implements HasColor, HasLabel
 {
     case New = 'new';
     case UnderReview = 'under_review';
@@ -20,6 +23,22 @@ enum ReportStatus: string
             self::InProgress => 'In progress',
             self::Solved => 'Solved',
             self::FalseReport => 'False report',
+        };
+    }
+
+    public function getLabel(): string
+    {
+        return $this->label();
+    }
+
+    public function getColor(): string
+    {
+        return match ($this) {
+            self::New => 'danger',
+            self::UnderReview => 'warning',
+            self::Assigned, self::InProgress => 'info',
+            self::Solved => 'success',
+            self::FalseReport => 'gray',
         };
     }
 }
