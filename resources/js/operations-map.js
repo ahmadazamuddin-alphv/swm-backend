@@ -32,16 +32,38 @@
     };
 
     const markerIcon = (point) => leaflet().divIcon({
-        className: `swm-leaflet-marker swm-leaflet-marker-${point.kind} swm-leaflet-marker-${point.tone}`,
-        html: '<span></span>',
+        className: [
+            'swm-leaflet-marker',
+            `swm-leaflet-marker-${point.kind ?? 'report'}`,
+            `swm-leaflet-marker-${point.tone ?? 'standard'}`,
+            point.selected ? 'is-selected' : '',
+        ].filter(Boolean).join(' '),
+        html: point.label
+            ? `<span data-label="${point.label}">${point.label}</span>`
+            : '<span></span>',
         iconSize: [30, 30],
         iconAnchor: [15, 15],
         popupAnchor: [0, -13],
     });
 
+    const callLivewire = (element, method, param) => {
+        const root = element.closest('[wire\\:id]');
+        if (!root || !window.Livewire) return;
+        window.Livewire.find(root.getAttribute('wire:id'))?.call(method, param);
+    };
+
     class OperationsMap extends HTMLElement {
         connectedCallback() {
-            if (this.map || !leaflet()) return;
+            if (this.map || !leaflet()) {
+                if (!leaflet() && this.querySelector('[data-map-status]')) {
+                    this.querySelector('[data-map-status]').textContent = 'Map library is still loading…';
+                    this.querySelector('[data-map-status]').hidden = false;
+                    window.setTimeout(() => {
+                        if (!this.map && leaflet()) this.connectedCallback();
+                    }, 200);
+                }
+                return;
+            }
 
             const dataNode = this.querySelector('script[type="application/json"]');
             const canvas = this.querySelector('[data-map-canvas]');
@@ -89,9 +111,13 @@
                 const position = [point.latitude, point.longitude];
                 coordinates.push(position);
                 byId.set(point.id, position);
-                leaflet().marker(position, { icon: markerIcon(point), title: point.title })
+                const marker = leaflet().marker(position, { icon: markerIcon(point), title: point.title })
                     .addTo(this.map)
                     .bindPopup(createPopup(point));
+
+                if (point.caseId != null) {
+                    marker.on('click', () => callLivewire(this, 'selectCase', point.caseId));
+                }
             });
 
             const lines = data.lines ?? [];
@@ -115,7 +141,10 @@
                 this.map.fitBounds(coordinates, { padding: [30, 30], maxZoom: 14 });
             }
 
-            requestAnimationFrame(() => this.map?.invalidateSize());
+            const refreshSize = () => this.map?.invalidateSize();
+            requestAnimationFrame(refreshSize);
+            window.setTimeout(refreshSize, 100);
+            window.setTimeout(refreshSize, 350);
             if (status && !tileFailed) status.hidden = true;
 
             if (data.routing?.endpoint && lines.length > 0) {

@@ -256,5 +256,6 @@ class DatabaseSeeder extends Seeder
         // Silence unused vars for static analysis friendliness
         unset($driverB, $centreA);
         $this->call(OperationsDemoSeeder::class);
+        $this->call(PotholeCaseSeeder::class);
     }
 }
