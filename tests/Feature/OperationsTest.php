@@ -3,9 +3,11 @@
 namespace Tests\Feature;
 
 use App\Enums\AssignmentStatus;
+use App\Enums\ReportSource;
 use App\Enums\ReportStatus;
 use App\Filament\Pages\OperationsDashboard;
 use App\Filament\Resources\AdminNotifications\AdminNotificationResource;
+use App\Filament\Resources\CctvDetections\Pages\ViewCctvDetection;
 use App\Filament\Resources\Reports\Pages\EditReport;
 use App\Filament\Resources\Reports\Pages\ViewReport;
 use App\Filament\Resources\Reports\ReportResource;
@@ -13,11 +15,13 @@ use App\Filament\Widgets\OperationsMap;
 use App\Filament\Widgets\PriorityQueue;
 use App\Filament\Widgets\ReportInbox;
 use App\Models\AdminNotification;
+use App\Models\CctvDetection;
 use App\Models\DisposalCentre;
 use App\Models\Report;
 use App\Models\ResponsibleParty;
 use App\Models\User;
 use App\Models\WasteCategory;
+use App\Services\CctvDemoAnalyzer;
 use App\Services\OperationsDemo;
 use App\Services\ReportRecommendationService;
 use App\Services\ReportWorkflow;
@@ -98,6 +102,54 @@ class OperationsTest extends TestCase
                 ->assertSee('Interactive road route')->assertSee('Calculating road route')
                 ->assertSee('router.project-osrm.org')->assertSee('Case history');
         }
+    }
+
+    public function test_cctv_demo_analyzer_persists_activity_category_location_and_timeline(): void
+    {
+        $detection = CctvDetection::create(['video_path' => '/demo/cctv/roadside-dumping.mp4']);
+
+        app(CctvDemoAnalyzer::class)->analyze($detection, 'roadside_dumping', 'shah_alam_sa17');
+        $detection = $detection->fresh();
+
+        $this->assertTrue($detection->activity_detected);
+        $this->assertSame('waste-piles', $detection->wasteCategory->slug);
+        $this->assertSame(3.0755, (float) $detection->latitude);
+        $this->assertSame(101.521, (float) $detection->longitude);
+        $this->assertSame('deterministic_simulation', $detection->raw_result['mode']);
+        $this->assertCount(4, $detection->raw_result['events']);
+        $this->assertSame('Illegal dumping activity', $detection->raw_result['events'][2]['label']);
+    }
+
+    public function test_cctv_review_page_renders_video_player_timeline_and_poc_boundary(): void
+    {
+        $detection = CctvDetection::create(['video_path' => '/demo/cctv/roadside-dumping.mp4']);
+        app(CctvDemoAnalyzer::class)->analyze($detection, 'roadside_dumping', 'shah_alam_sa17');
+
+        Livewire::test(ViewCctvDetection::class, ['record' => $detection->id])
+            ->assertSuccessful()
+            ->assertSee('Play the source clip')
+            ->assertSee('Incident timeline')
+            ->assertSee('Create report from detection')
+            ->assertSee('deterministic computer-vision simulation');
+    }
+
+    public function test_cctv_detection_can_be_promoted_to_a_government_report(): void
+    {
+        $detection = CctvDetection::create(['video_path' => '/demo/cctv/roadside-dumping.mp4']);
+        app(CctvDemoAnalyzer::class)->analyze($detection, 'roadside_dumping', 'shah_alam_sa17');
+
+        Livewire::test(ViewCctvDetection::class, ['record' => $detection->id])
+            ->callAction('createReport')
+            ->assertHasNoActionErrors();
+
+        $reportId = $detection->fresh()->report_id;
+        $this->assertNotNull($reportId);
+        $this->assertSame(ReportSource::Cctv, Report::findOrFail($reportId)->source);
+        $this->assertSame($detection->waste_category_id, Report::findOrFail($reportId)->waste_category_id);
+        Livewire::test(ViewReport::class, ['record' => $reportId])
+            ->assertSuccessful()
+            ->assertSee('CCTV incident evidence')
+            ->assertSee('Source clip retained');
     }
 
     public function test_guest_cannot_enter_operations(): void

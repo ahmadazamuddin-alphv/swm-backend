@@ -1,6 +1,6 @@
 @php
     $report = $getRecord();
-    $report->loadMissing(['wasteCategory', 'zone.responsibleParty.contractor', 'assignment.responsibleParty.contractor', 'assignment.driver', 'resolutionProofs.uploader', 'activities.user']);
+    $report->loadMissing(['wasteCategory', 'zone.responsibleParty.contractor', 'assignment.responsibleParty.contractor', 'assignment.driver', 'resolutionProofs.uploader', 'activities.user', 'cctvDetection']);
     $recommendations = app(\App\Services\ReportRecommendationService::class);
     $suggestion = $recommendations->recommend($report);
     $centres = $recommendations->disposalOptions($report->latitude === null ? null : (float) $report->latitude, $report->longitude === null ? null : (float) $report->longitude, $report->waste_category_id);
@@ -94,6 +94,23 @@
                     <div><dt>Longitude</dt><dd>{{ $report->longitude ?? 'Not recorded' }}</dd></div>
                 </dl>
             </section>
+
+            @if ($report->cctvDetection)
+                @php
+                    $cctvVideoUrl = str_starts_with((string) $report->cctvDetection->video_path, '/demo/')
+                        ? url($report->cctvDetection->video_path)
+                        : \Illuminate\Support\Facades\Storage::disk('public')->url($report->cctvDetection->video_path);
+                    $cctvResult = $report->cctvDetection->raw_result ?? [];
+                @endphp
+                <section class="swm-panel swm-cctv-report-evidence">
+                    <div class="swm-section-heading"><div><h2>CCTV incident evidence</h2><p class="swm-muted">Source clip retained from detection run #{{ $report->cctvDetection->id }}.</p></div><span class="swm-count">{{ number_format((float) ($report->cctvDetection->confidence ?? 0), 1) }}% confidence</span></div>
+                    <video controls preload="metadata" playsinline class="swm-cctv-report-video" aria-label="CCTV incident evidence for {{ $report->reference }}">
+                        <source src="{{ $cctvVideoUrl }}">
+                        Your browser cannot play this video format.
+                    </video>
+                    <p class="swm-muted">{{ data_get($cctvResult, 'evidence_note', 'Review the retained CCTV clip alongside the report evidence.') }}</p>
+                </section>
+            @endif
 
             <section class="swm-panel">
                 <h2>Reporter</h2>

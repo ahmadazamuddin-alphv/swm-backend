@@ -1,0 +1,3 @@
+Source: user-supplied MP4 copied from the local Downloads folder for this POC.
+Original filename: Ramai puas hati lelaki kutip semula sampah dibuang tepi jalan lepas kena sound dari CCTV (1).mp4
+The application displays this clip as a fictional demonstration record and adds deterministic review annotations; it does not claim that the annotations came from a trained computer-vision model.

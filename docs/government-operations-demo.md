@@ -28,6 +28,12 @@ Open `http://127.0.0.1:8000/admin`. Existing local officer data is preserved: th
 7. Select **Record resolution**, upload a JPEG, PNG or WebP clearance photograph, and save. The case closes and its assignment is completed.
 8. For the alternate closure path, open another case and select **More actions**, then **Mark false report**. The investigation reason is mandatory.
 
+## CCTV detection walkthrough
+
+Open **CCTV POC → CCTV Detections**, then select **Create CCTV detection**. Upload a short MP4, WebM, MOV or AVI clip up to 100 MB. Choose a deterministic scene profile and camera metadata fixture, then save. The review page plays the uploaded clip, shows timestamped event rows, draws the stored boxes when playback reaches an event, and lets you filter visible boxes by confidence. Select **Create report from detection** after reviewing the evidence; the detected category, activity, confidence, available location and source-video link are carried into the government case workflow.
+
+The bundled `/demo/cctv/roadside-dumping.mp4` is a user-supplied roadside-dumping clip included as a local demo asset. Its annotations are deterministic POC output from `CctvDemoAnalyzer`, not a trained model or a legal finding. Re-run the analysis with the control clip to review the no-incident state.
+
 The supplied `public/demo/reports/lane-cleared.png` can be used as a fictional clearance upload during a walkthrough. Uploaded proof is stored on the local `public` disk under the case ID.
 
 ## Demo logic

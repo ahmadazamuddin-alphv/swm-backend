@@ -4,7 +4,6 @@ namespace App\Filament\Resources\CctvDetections\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -16,17 +15,18 @@ class CctvDetectionsTable
     {
         return $table
             ->columns([
-                TextColumn::make('id')->sortable(),
-                TextColumn::make('wasteCategory.name')->label('Waste'),
-                IconColumn::make('activity_detected')->boolean(),
-                TextColumn::make('confidence'),
-                TextColumn::make('report.reference')->label('Report')->placeholder('—'),
-                TextColumn::make('created_at')->dateTime()->sortable(),
+                TextColumn::make('id')->label('Run')->sortable(),
+                TextColumn::make('raw_result.scenario_label')->label('Scenario')->placeholder('Awaiting analysis')->wrap(),
+                IconColumn::make('activity_detected')->label('Activity')->boolean(),
+                TextColumn::make('wasteCategory.name')->label('Waste type')->placeholder('None detected'),
+                TextColumn::make('confidence')->suffix('%')->sortable(),
+                TextColumn::make('raw_result.camera.label')->label('Camera')->placeholder('Unknown')->wrap()->toggleable(),
+                TextColumn::make('report.reference')->label('Report')->placeholder('Not linked'),
+                TextColumn::make('created_at')->label('Uploaded')->since()->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                ViewAction::make()->label('Review'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
