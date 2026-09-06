@@ -55,6 +55,16 @@ typography:
     fontSize: "10px"
     fontWeight: 400
     lineHeight: 1.4
+  cctv-title:
+    fontFamily: "Figtree, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "1.5rem"
+    fontWeight: 650
+    lineHeight: 1.3
+  cctv-metric:
+    fontFamily: "Figtree, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "1.2rem"
+    fontWeight: 650
+    lineHeight: 1.35
 rounded:
   xs: "2px"
   sm: "4px"
@@ -149,6 +159,8 @@ Muted Selangor red carries identity and interaction, while warm gold identifies 
 - **Recommendation** (650, 1.75rem, 1.2): Crew and lorry recommendations.
 - **Metric** (650, 2rem, 1.2): Overview totals with tabular numerals.
 - **Attribution** (400, 10px, 1.4): Required map attribution only.
+- **CCTV title** (650, 1.5rem, 1.3): Analysis run heading above the source clip.
+- **CCTV metric** (650, 1.2rem, 1.35): Compact detection summary values.
 
 ### Named Rules
 
@@ -222,6 +234,15 @@ Evidence media fills its column. Two-column fact lists, accountability blocks, r
 
 Leaflet maps sit inside the same thin-rule media frame as evidence. Report markers inherit high, elevated and standard risk colours; driver and disposal markers use distinct shapes. Case maps render OSRM road geometry over a quieter dashed direct-route fallback and report road distance and estimated duration in a compact status label. Popups use safe text content and link directly to investigation. The visible legend and OpenStreetMap attribution remain outside decorative hierarchy, and service-error messages explain which fallback remains available.
 
+### CCTV Review
+
+CCTV review treats the source video as primary evidence. The player owns the widest surface, with detection boxes appearing at their stored timestamps and a confidence slider changing visibility without mutating the saved result. A compact metric strip gives officers the incident count, waste category, camera metadata and simulated mode before the timeline and finding copy. Timeline rows are plain text buttons that jump the player to an observation; incident evidence, ordinary observations and the deterministic-demo boundary remain readable without color alone.
+
+- **Player surface:** Bordered 14px panel with a full-width 8px media frame, dark video canvas, timestamp label and a 44px minimum confidence range control.
+- **Detection overlays:** Gold 2px boxes mark ordinary observations; deep red 2px boxes mark incident evidence. Labels use compact 4px corners and soft semantic washes.
+- **Timeline:** Event rows are full-width text buttons with 14px vertical padding, quiet separators, deep-red timestamps and a wash on hover or the active timestamp.
+- **Responsive behavior:** The four-cell metric strip becomes a two-by-two grid at 640px; the timeline and finding panels stack below 1100px; player controls become one column on phones.
+
 ## Do's and Don'ts
 
 ### Do:
@@ -232,6 +253,7 @@ Leaflet maps sit inside the same thin-rule media frame as evidence. Report marke
 - **Do** allow evidence media and operational tables to use the width they need.
 - **Do** preserve usable focus states and 44px phone targets for custom actions.
 - **Do** keep risk legends, map attribution and route fallback limitations visible beside every operational map.
+- **Do** make the video, timestamp events, confidence threshold and simulated-analysis boundary visible in the first review pass.
 
 ### Don't:
 
@@ -241,3 +263,8 @@ Leaflet maps sit inside the same thin-rule media frame as evidence. Report marke
 - **Don't** compress report evidence into small decorative thumbnails.
 - **Don't** merge the area owner and assigned clearance team into one ambiguous label.
 - **Don't** present the dashed direct-line fallback as road navigation.
+- **Don't** label deterministic CCTV annotations as live AI inference or hide the source clip behind summary metrics.
+
+### CCTV review workspace update (2026-09-07)
+
+The CCTV review now uses one compact Filament heading and a camera/status row. The primary desktop surface has a shared viewport height budget: fitted source video and a four-observation timeline on the left, consolidated findings and report navigation on the right. Each fact appears once. Detailed evidence and limitations use a native disclosure; the simulation boundary remains visible. The video shell is fitted in both dimensions using intrinsic aspect ratio so overlays share the rendered image geometry. At narrow content widths the page returns to normal document flow with a two-column observation list. Actual browser fit requires user visual verification.

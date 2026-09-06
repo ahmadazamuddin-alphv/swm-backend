@@ -18,6 +18,7 @@ use App\Models\ResponsibleParty;
 use App\Models\User;
 use App\Models\WasteCategory;
 use App\Models\Zone;
+use App\Services\CctvDemoAnalyzer;
 use App\Services\ReportRecommendationService;
 use Illuminate\Database\Seeder;
 
@@ -237,8 +238,8 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        CctvDetection::firstOrCreate(
-            ['video_path' => 'cctv/demo-detection.mp4'],
+        $demoDetection = CctvDetection::firstOrCreate(
+            ['video_path' => '/demo/cctv/roadside-dumping.mp4'],
             [
                 'waste_category_id' => $categories[0]->id,
                 'activity_detected' => true,
@@ -252,6 +253,7 @@ class DatabaseSeeder extends Seeder
                 'report_id' => Report::where('reference', 'RPT-DEMO0005')->value('id'),
             ],
         );
+        app(CctvDemoAnalyzer::class)->analyze($demoDetection, 'roadside_dumping', 'shah_alam_sa17');
 
         // Silence unused vars for static analysis friendliness
         unset($driverB, $centreA);

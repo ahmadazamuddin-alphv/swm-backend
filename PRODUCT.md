@@ -22,11 +22,12 @@ The existing Laravel 12 / Filament 5 application at `/admin` is the agreed imple
 
 - A local demonstration with fictional seeded operational records; no production service claims.
 - In-app notifications, report evidence and contacts, risk ordering, mandatory false-report reasons, assignments, resolution uploads and history.
+- CCTV upload and review runs support local video playback, timestamped simulated detections, incident evidence and report creation from a detected event.
 - Deterministic manpower, lorry and deadline suggestions. Location-based disposal and available-driver suggestions use local coordinates and category compatibility.
 - Interactive OpenStreetMap views plot reports, driver depots and disposal centres. Case maps request driving geometry, distance and duration from the public OSRM demo service, with a dashed straight-line fallback when routing is unavailable.
 - Uploaded evidence stays on local storage. No external AI, email or push delivery.
 - The citizen Next.js demo remains a separate browser-local experience; submissions are simulated in the government app for this block.
-- CCTV and expanded performance analytics are separate CSV workstreams.
+- Expanded performance analytics are a separate CSV workstream; the CCTV AI-powered POC is implemented as a bounded local demo surface.
 
 ## Evidence on Hand
 

@@ -214,9 +214,86 @@
 .swm-panel :is(button, a, summary):focus-visible, .swm-case a:focus-visible { outline: 2px solid var(--swm-red-deep); outline-offset: 4px; }
 .swm-panel button:disabled { opacity: .55; cursor: wait; }
 .swm-case ::selection, .swm-inbox ::selection { background: var(--swm-red-soft); color: #492323; }
+.swm-cctv-review { color: var(--swm-ink); min-width: 0; }
+.swm-cctv-status-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-bottom: 24px; }
+.swm-cctv-kicker { color: var(--swm-red-deep); font-size: .75rem !important; font-weight: 650; letter-spacing: .04em; text-transform: uppercase; margin: 0 0 6px; }
+.swm-cctv-status-row h2 { margin: 0 0 4px; color: var(--swm-ink); font-size: 1.5rem; line-height: 1.3; font-weight: 650; }
+.swm-cctv-status-row p { margin: 0; }
+.swm-cctv-badges { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.swm-cctv-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--swm-line); border-radius: 14px; background: var(--swm-surface); overflow: hidden; margin-bottom: 24px; }
+.swm-cctv-metrics > div { display: flex; flex-direction: column; gap: 5px; min-width: 0; padding: 18px 20px; }
+.swm-cctv-metrics > div + div { border-left: 1px solid var(--swm-line); }
+.swm-cctv-metrics span, .swm-cctv-metrics small { color: var(--swm-muted); font-size: .75rem; line-height: 1.45; }
+.swm-cctv-metrics strong { font-size: 1.2rem; line-height: 1.35; font-weight: 650; overflow-wrap: anywhere; }
+.swm-cctv-metric-text { font-size: .9375rem !important; }
+.swm-cctv-panel { min-width: 0; padding: 24px; border: 1px solid var(--swm-line); border-radius: 14px; background: var(--swm-surface); }
+.swm-cctv-panel h2 { margin: 0 0 8px; font-size: 1.125rem; line-height: 1.5; font-weight: 650; }
+.swm-cctv-panel p { font-size: .875rem; line-height: 1.65; }
+.swm-cctv-player-panel { margin-bottom: 24px; }
+.swm-cctv-workspace { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(320px, .8fr); gap: 24px; align-items: start; margin-bottom: 24px; }
+.swm-cctv-workspace .swm-cctv-player-panel { margin-bottom: 0; }
+.swm-cctv-frame-label { color: var(--swm-muted); font-size: .75rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.swm-cctv-video-shell { position: relative; overflow: hidden; border-radius: 8px; background: #17181b; aspect-ratio: 16 / 9; }
+.swm-cctv-video-shell video { display: block; width: 100%; height: 100%; object-fit: contain; }
+.swm-cctv-overlay { position: absolute; inset: 0; pointer-events: none; }
+.swm-cctv-box { position: absolute; border: 2px solid #e8c547; color: #242529; }
+.swm-cctv-box.is-incident { border-color: var(--swm-red-deep); }
+.swm-cctv-box span { position: absolute; top: -1.65rem; left: -2px; display: block; width: max-content; max-width: 240px; padding: 4px 6px; border-radius: 4px; background: #f8efc8; color: #332a0b; font-size: .75rem; font-weight: 650; line-height: 1.35; }
+.swm-cctv-box.is-incident span { background: #f3e0e0; color: #492323; }
+.swm-cctv-video-status { position: absolute; inset: auto 12px 12px; margin: 0 !important; padding: 8px 10px; border: 1px solid #52525b; border-radius: 6px; background: rgb(23 24 27 / 92%); color: #f4f4f5; text-align: center; }
+.swm-cctv-player-controls { display: grid; grid-template-columns: auto minmax(140px, 1fr); align-items: center; gap: 10px 16px; padding-top: 16px; }
+.swm-cctv-player-controls label { font-size: .8125rem; font-weight: 600; }
+.swm-cctv-player-controls input { width: 100%; min-height: 44px; accent-color: var(--swm-red-deep); }
+.swm-cctv-player-note { grid-column: 1 / -1; color: var(--swm-muted); font-size: .75rem; }
+.swm-cctv-review-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(300px, .9fr); gap: 24px; margin-bottom: 24px; align-items: start; }
+.swm-cctv-workspace > .swm-cctv-review-grid { display: flex; flex-direction: column; gap: 24px; margin-bottom: 0; }
+.swm-cctv-events { padding: 0; margin: 12px 0 0; list-style: none; }
+.swm-cctv-events li + li { border-top: 1px solid var(--swm-line); }
+.swm-cctv-event { display: flex; flex-direction: column; align-items: flex-start; width: 100%; gap: 4px; padding: 14px 10px; border-radius: 6px; text-align: left; cursor: pointer; }
+.swm-cctv-event:hover, .swm-cctv-event.is-active { background: var(--swm-wash); }
+.swm-cctv-event:focus-visible { outline: 2px solid var(--swm-red-deep); outline-offset: 2px; }
+.swm-cctv-event[hidden] { display: none; }
+.swm-cctv-event-time { color: var(--swm-red-deep); font-size: .75rem; font-weight: 650; font-variant-numeric: tabular-nums; }
+.swm-cctv-event strong { color: var(--swm-ink); font-size: .875rem; font-weight: 650; }
+.swm-cctv-event > span:last-child { color: var(--swm-muted); font-size: .75rem; }
+.swm-cctv-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin: 18px 0; }
+.swm-cctv-facts dt { color: var(--swm-muted); font-size: .75rem; margin-bottom: 4px; }
+.swm-cctv-facts dd { font-size: .875rem; line-height: 1.5; overflow-wrap: anywhere; }
+.swm-cctv-evidence-note { padding-top: 16px; border-top: 1px solid var(--swm-line); }
+.swm-cctv-limitations { background: var(--swm-wash); }
+.swm-cctv-limitations ul { display: grid; gap: 6px; padding-left: 18px; margin: 10px 0 0; color: var(--swm-muted); font-size: .75rem; line-height: 1.6; list-style: disc; }
+.swm-cctv-report-video { display: block; width: 100%; max-height: 540px; margin: 16px 0; border-radius: 8px; background: #17181b; }
+@media (min-width: 1500px) {
+    .swm-cctv-workspace { grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr) minmax(300px, .75fr); gap: 16px; }
+    .swm-cctv-workspace > .swm-cctv-review-grid { display: contents; }
+    .swm-cctv-workspace > .swm-cctv-review-grid > .swm-cctv-panel { min-height: 0; max-height: 520px; overflow: auto; }
+    .swm-cctv-workspace .swm-cctv-player-panel { min-height: 0; }
+    .swm-cctv-workspace .swm-cctv-video-shell { max-height: 430px; }
+}
 @media (max-width: 1100px) {
     .swm-case-grid { grid-template-columns: minmax(0, 1fr); }
     .swm-case-side { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+    .swm-cctv-review-grid { grid-template-columns: minmax(0, 1fr); }
+    .swm-cctv-workspace { grid-template-columns: minmax(0, 1fr); }
+    .swm-cctv-workspace .swm-cctv-player-panel { margin-bottom: 0; }
+}
+@media (min-width: 1101px) and (max-height: 900px) {
+    .swm-cctv-status-row { margin-bottom: 12px; }
+    .swm-cctv-metrics { margin-bottom: 12px; }
+    .swm-cctv-metrics > div { padding: 12px 14px; gap: 3px; }
+    .swm-cctv-workspace { gap: 14px; margin-bottom: 12px; }
+    .swm-cctv-panel { padding: 16px; }
+    .swm-cctv-workspace .swm-cctv-player-panel { padding: 16px; }
+    .swm-cctv-video-shell { max-height: 360px; }
+    .swm-cctv-workspace > .swm-cctv-review-grid { gap: 12px; }
+    .swm-cctv-workspace > .swm-cctv-review-grid > .swm-cctv-panel { max-height: 360px; overflow: auto; }
+    .swm-cctv-events { margin-top: 6px; }
+    .swm-cctv-event { padding: 9px 8px; }
+    .swm-cctv-facts { gap: 10px; margin: 10px 0; }
+    .swm-cctv-limitations { padding: 12px 16px; }
+    .swm-cctv-limitations h2 { display: inline; margin-right: 8px; }
+    .swm-cctv-limitations p { display: inline; }
+    .swm-cctv-limitations ul { display: none; }
 }
 @media (max-width: 640px) {
     .swm-overview { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -231,6 +308,71 @@
     .swm-map-canvas { height: 340px; }
     .swm-map-route .swm-map-canvas { height: 290px; }
     .swm-map-legend { gap: 9px 14px; }
+    .swm-cctv-status-row { flex-direction: column; gap: 14px; }
+    .swm-cctv-badges { justify-content: flex-start; }
+    .swm-cctv-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .swm-cctv-metrics > div:nth-child(3) { border-left: 0; border-top: 1px solid var(--swm-line); }
+    .swm-cctv-metrics > div:nth-child(4) { border-top: 1px solid var(--swm-line); }
+    .swm-cctv-panel { padding: 18px; }
+    .swm-cctv-player-controls { grid-template-columns: 1fr; }
+    .swm-cctv-player-controls input { grid-row: 2; }
+    .swm-cctv-facts { gap: 14px; }
+}
+
+/* CCTV review: evidence first, with one shared desktop height budget. */
+.fi-main:has(.swm-cctv-console) { padding-top: 16px; padding-bottom: 16px; }
+.fi-page:has(.swm-cctv-console) .fi-page-header-main-ctn { gap: 16px; }
+.fi-page:has(.swm-cctv-console) .fi-header-heading { font-size: 1.5rem; line-height: 1.3; }
+.swm-cctv-console { container-type: inline-size; }
+.swm-cctv-context { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; font-size: .875rem; color: var(--swm-muted); }
+.swm-cctv-desk { display: grid; grid-template-columns: minmax(0, 1fr) 320px; border: 1px solid var(--swm-line); border-radius: 14px; overflow: hidden; background: var(--swm-surface); }
+.swm-cctv-evidence { display: flex; flex-direction: column; min-width: 0; min-height: 0; padding: 16px; margin: 0; }
+.swm-cctv-section-title { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-bottom: 10px; }
+.swm-cctv-section-title h2 { margin: 0; font-size: .875rem; font-weight: 650; }
+.swm-cctv-section-title > span { font-size: .75rem; color: var(--swm-muted); font-variant-numeric: tabular-nums; }
+.swm-cctv-console .swm-cctv-player { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+.swm-cctv-stage { display: flex; align-items: center; justify-content: center; background: #17181b; border-radius: 8px; flex: 1; min-height: 0; overflow: hidden; }
+.swm-cctv-console .swm-cctv-video-shell { flex: none; max-height: none; border-radius: 0; width: 100%; }
+.swm-cctv-console .swm-cctv-box span { top: 0; left: 0; max-width: 100%; width: max-content; font-size: .75rem; overflow-wrap: anywhere; }
+.swm-cctv-filter { display: flex; align-items: center; gap: 16px; padding: 4px 0; }
+.swm-cctv-filter label { font-size: .75rem; white-space: nowrap; }
+.swm-cctv-filter output { font-weight: 650; font-variant-numeric: tabular-nums; }
+.swm-cctv-filter input { flex: 1; min-width: 60px; max-width: 220px; min-height: 44px; accent-color: var(--swm-red-deep); }
+.swm-cctv-console .swm-cctv-events { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin: 0; flex-shrink: 0; }
+.swm-cctv-console .swm-cctv-events li + li { border-top: 0; }
+.swm-cctv-console .swm-cctv-event { height: 100%; min-height: 88px; padding: 8px; gap: 4px; background: var(--swm-wash); border: 1px solid transparent; }
+.swm-cctv-console .swm-cctv-event strong { font-size: .8125rem; line-height: 1.35; }
+.swm-cctv-console .swm-cctv-event.is-active { border-color: var(--swm-red-deep); background: var(--swm-red-soft); }
+.swm-cctv-console .swm-cctv-event[hidden], .swm-cctv-filter-empty[hidden] { display: none; }
+.swm-cctv-filter-empty { font-size: .8125rem; padding-top: 8px; color: var(--swm-muted); }
+.swm-cctv-finding { padding: 16px 20px; border-left: 1px solid var(--swm-line); min-width: 0; overflow: auto; scrollbar-width: thin; scrollbar-color: var(--swm-line) transparent; }
+.swm-cctv-result { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 8px 0 12px; }
+.swm-cctv-result > strong { font-size: 1.25rem; line-height: 1.3; }
+.swm-cctv-result p, .swm-cctv-summary, .swm-cctv-next-step { font-size: .8125rem; line-height: 1.5; margin: 0; }
+.swm-cctv-result p { color: var(--swm-muted); }
+.swm-cctv-console .swm-cctv-facts { display: flex; flex-direction: column; gap: 10px; padding: 14px 0; margin: 14px 0; border-block: 1px solid var(--swm-line); }
+.swm-cctv-console .swm-cctv-facts > div { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 8px; }
+.swm-cctv-console .swm-cctv-facts dd { font-size: .8125rem; }
+.swm-cctv-report-link { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; color: var(--swm-red-deep); font-size: .8125rem; font-weight: 650; text-decoration: underline; text-underline-offset: 4px; }
+.swm-cctv-report-link svg { width: 16px; height: 16px; }
+.swm-cctv-details { margin-top: 8px; font-size: .8125rem; line-height: 1.5; }
+.swm-cctv-details summary { cursor: pointer; min-height: 44px; padding-block: 12px; }
+.swm-cctv-details p, .swm-cctv-details ul { margin: 8px 0; color: var(--swm-muted); }
+.swm-cctv-details ul { padding-left: 18px; list-style: disc; }
+.swm-cctv-demo-note { font-size: .75rem; line-height: 1.5; color: var(--swm-muted); padding-top: 12px; border-top: 1px solid var(--swm-line); }
+.swm-cctv-console :is(a, summary, input):focus-visible { outline: 2px solid var(--swm-red-deep); outline-offset: 3px; }
+@media (min-width: 1100px) and (min-height: 700px) {
+    .swm-cctv-desk { height: calc(100dvh - 240px); min-height: 420px; }
+}
+@media (max-width: 1099px), (max-height: 699px) {
+    .swm-cctv-stage { flex: none; height: 340px; }
+}
+@container (max-width: 720px) {
+    .swm-cctv-desk { grid-template-columns: minmax(0, 1fr); height: auto; }
+    .swm-cctv-stage { flex: none; height: 300px; }
+    .swm-cctv-finding { border-left: 0; border-top: 1px solid var(--swm-line); overflow: visible; }
+    .swm-cctv-console .swm-cctv-events { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .swm-cctv-context { flex-wrap: wrap; }
 }
 
 /* —— Potholes operations dashboard —— */

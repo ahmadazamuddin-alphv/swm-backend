@@ -65,6 +65,8 @@ The current hardcoded POC implements all nine items below in `/admin`. See the [
 
 ## CCTV AI-powered POC requirements
 
+The CCTV POC is implemented in `/admin/cctv-detections`. It stores uploaded video locally, plays the source clip, overlays timestamped deterministic detection annotations, exposes waste/activity/location/confidence findings, and can create a government report while retaining the source clip as incident evidence. It is explicitly a simulated computer-vision workflow and does not claim trained-model inference.
+
 | Feature | Details |
 |---|---|
 | **Upload video for POC** | Working prototype: upload a video to test computer-vision detection. |

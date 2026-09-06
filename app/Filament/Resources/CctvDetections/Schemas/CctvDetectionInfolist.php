@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\CctvDetections\Schemas;
 
-use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\View;
 use Filament\Schemas\Schema;
 
 class CctvDetectionInfolist
@@ -11,14 +11,7 @@ class CctvDetectionInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('video_path'),
-                TextEntry::make('wasteCategory.name')->label('Waste type'),
-                TextEntry::make('activity_detected')->badge(),
-                TextEntry::make('latitude'),
-                TextEntry::make('longitude'),
-                TextEntry::make('confidence'),
-                TextEntry::make('report.reference')->label('Linked report')->placeholder('—'),
-                TextEntry::make('created_at')->dateTime(),
+                View::make('filament.cctv-detections.review')->columnSpanFull(),
             ]);
     }
 }
