@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-06T23:25:00+08:00",
+  "title": "Design System: Selangor Waste Management Operations",
+  "extensions": {
+    "colorMeta": {
+      "selangor-red": { "role": "primary", "displayName": "Selangor Red", "canonical": "#c45c5c", "tonalRamp": ["#321717", "#572929", "#7c3a3a", "#a34c4c", "#c45c5c", "#d88e8e", "#ebc1c1", "#f8eeee"] },
+      "selangor-red-soft": { "role": "primary", "displayName": "Soft Selangor Red", "canonical": "#f3e0e0", "tonalRamp": ["#301f1f", "#5a3b3b", "#845858", "#ad7777", "#ce9d9d", "#e4bebe", "#f3e0e0", "#fbf3f3"] },
+      "selangor-red-deep": { "role": "primary", "displayName": "Deep Selangor Red", "canonical": "#a84848", "tonalRamp": ["#2b1212", "#4c2020", "#6e2f2f", "#903d3d", "#b04f4f", "#ce8181", "#e8b5b5", "#f7eaea"] },
+      "operations-gold": { "role": "secondary", "displayName": "Operations Gold", "canonical": "#e8c547", "tonalRamp": ["#332a0b", "#5e4e14", "#88721f", "#b3972f", "#d8b940", "#e8cf70", "#f3e5aa", "#fbf6df"] },
+      "operations-gold-soft": { "role": "secondary", "displayName": "Soft Operations Gold", "canonical": "#f8efc8", "tonalRamp": ["#332f1e", "#5e5838", "#8a8154", "#b6ab73", "#d8cd98", "#eadfb0", "#f8efc8", "#fdf9e9"] },
+      "surface": { "role": "neutral", "displayName": "Operations Surface", "canonical": "#ffffff", "tonalRamp": ["#262626", "#4d4d4d", "#737373", "#999999", "#bfbfbf", "#d9d9d9", "#ededed", "#ffffff"] },
+      "ink": { "role": "neutral", "displayName": "Operations Ink", "canonical": "#242529", "tonalRamp": ["#17181b", "#242529", "#3c3e44", "#5a5c64", "#85868d", "#b1b2b6", "#dadadd", "#f3f3f4"] },
+      "muted": { "role": "neutral", "displayName": "Muted Slate", "canonical": "#606168", "tonalRamp": ["#1e1e21", "#35363a", "#4b4c52", "#606168", "#818289", "#a7a8ad", "#cdced1", "#eeeeef"] },
+      "map-standard": { "role": "neutral", "displayName": "Standard Risk Marker", "canonical": "#71717a", "tonalRamp": ["#1f1f22", "#343439", "#4b4b51", "#626269", "#797981", "#9c9ca3", "#c4c4c9", "#eeeeef"] },
+      "map-popup-muted": { "role": "neutral", "displayName": "Map Popup Muted", "canonical": "#52525b", "tonalRamp": ["#1b1b1f", "#303036", "#45454d", "#5b5b64", "#777780", "#9a9aa2", "#c1c1c6", "#ececee"] },
+      "rule": { "role": "neutral", "displayName": "Quiet Rule", "canonical": "#e4e4e7", "tonalRamp": ["#27272a", "#48484c", "#69696f", "#8b8b91", "#aeafb4", "#c9c9cd", "#e4e4e7", "#f7f7f8"] },
+      "wash": { "role": "neutral", "displayName": "Case Wash", "canonical": "#faf8f8", "tonalRamp": ["#2d2828", "#534949", "#796b6b", "#a18f8f", "#c5b5b5", "#dfd4d4", "#f1ebeb", "#faf8f8"] }
+    },
+    "typographyMeta": {
+      "headline": { "displayName": "Panel Headline", "purpose": "Section headings and operational landmarks." },
+      "body": { "displayName": "Operational Body", "purpose": "Case descriptions, guidance and recommendation rationale." },
+      "label": { "displayName": "Metadata Label", "purpose": "Field names, captions, timestamps and compact status context." },
+      "control": { "displayName": "Compact Control", "purpose": "Map actions, legends and inbox controls." },
+      "emphasis": { "displayName": "Operational Emphasis", "purpose": "Driver, destination and responsibility names." },
+      "recommendation": { "displayName": "Recommendation Value", "purpose": "Crew and lorry recommendations." },
+      "metric": { "displayName": "Overview Metric", "purpose": "Dashboard totals with tabular numerals." },
+      "attribution": { "displayName": "Map Attribution", "purpose": "Required provider attribution only." }
+    },
+    "shadows": [
+      { "name": "active-navigation", "value": "0 1px 2px rgb(196 92 92 / 25%)", "purpose": "Small state cue on the selected sidebar item only." }
+    ],
+    "motion": [],
+    "breakpoints": [
+      { "name": "coordination-stack", "value": "1100px" },
+      { "name": "phone", "value": "640px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Text Action",
+      "kind": "button",
+      "refersTo": "text-action",
+      "description": "Compact deep-red action used in the notification inbox and secondary controls.",
+      "html": "<button class=\"ds-text-action\">Mark all read</button>",
+      "css": ".ds-text-action { color: #a84848; background: transparent; border: 0; border-radius: 6px; padding: 8px 0; font: 600 13px/1.4 Figtree, sans-serif; text-underline-offset: 4px; cursor: pointer; } .ds-text-action:hover { text-decoration: underline; } .ds-text-action:focus-visible { outline: 2px solid #a84848; outline-offset: 4px; }"
+    },
+    {
+      "name": "Active Navigation",
+      "kind": "nav",
+      "refersTo": "active-navigation",
+      "description": "Current operations destination in the Filament sidebar.",
+      "html": "<a class=\"ds-nav-active\" href=\"#\"><svg aria-hidden=\"true\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M3 13h8V3H3zM13 21h8V11h-8zM13 3h8v6h-8zM3 17h8v4H3z\"/></svg><span>Operations overview</span></a>",
+      "css": ".ds-nav-active { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 6px; background: #a84848; color: #fff; font: 600 14px/1.4 Figtree, sans-serif; text-decoration: none; box-shadow: 0 1px 2px rgb(196 92 92 / 25%); } .ds-nav-active:hover { background: #943d3d; } .ds-nav-active:focus-visible { outline: 2px solid #a84848; outline-offset: 3px; }"
+    },
+    {
+      "name": "Operations Panel",
+      "kind": "card",
+      "refersTo": "operations-panel",
+      "description": "Flat bordered container for evidence, accountability, recommendations and history.",
+      "html": "<section class=\"ds-panel\"><h2>Report evidence</h2><p>Evidence and investigation facts stay together.</p></section>",
+      "css": ".ds-panel { color: #242529; background: #fff; border: 1px solid #e4e4e7; border-radius: 14px; padding: 24px; font-family: Figtree, sans-serif; } .ds-panel h2 { margin: 0 0 16px; font-size: 18px; line-height: 1.5; font-weight: 650; } .ds-panel p { max-width: 75ch; margin: 0; color: #606168; font-size: 14px; line-height: 1.65; } .ds-panel:hover { border-color: #d3d3d7; } .ds-panel:focus-within { outline: 2px solid #a84848; outline-offset: 4px; }"
+    },
+    {
+      "name": "Risk Chip",
+      "kind": "chip",
+      "refersTo": "operations-panel",
+      "description": "Text-backed badge for an elevated operational risk state.",
+      "html": "<span class=\"ds-risk-chip\">82 · Elevated</span>",
+      "css": ".ds-risk-chip { display: inline-flex; align-items: center; min-height: 26px; padding: 4px 9px; border-radius: 6px; background: #f8efc8; color: #5e4e14; font: 600 12px/1.4 Figtree, sans-serif; } .ds-risk-chip:hover { background: #f3e5aa; } .ds-risk-chip:focus-visible { outline: 2px solid #a84848; outline-offset: 3px; }"
+    },
+    {
+      "name": "Metric Strip",
+      "kind": "custom",
+      "refersTo": "operations-panel",
+      "description": "Shared summary surface with compact labels and large tabular values.",
+      "html": "<div class=\"ds-metric-strip\"><div><span>Open cases</span><strong>10</strong></div><div><span>High risk</span><strong>3</strong></div></div>",
+      "css": ".ds-metric-strip { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); color: #242529; background: #fff; border: 1px solid #e4e4e7; border-radius: 14px; font-family: Figtree, sans-serif; overflow: hidden; } .ds-metric-strip div { display: flex; flex-direction: column; gap: 4px; padding: 22px 24px; } .ds-metric-strip div + div { border-left: 1px solid #e4e4e7; } .ds-metric-strip span { color: #606168; font-size: 14px; } .ds-metric-strip strong { font-size: 32px; line-height: 1.2; font-weight: 650; font-variant-numeric: tabular-nums; } .ds-metric-strip:hover { border-color: #d3d3d7; } .ds-metric-strip:focus-within { outline: 2px solid #a84848; outline-offset: 4px; }"
+    },
+    {
+      "name": "Evidence Frame",
+      "kind": "custom",
+      "refersTo": "evidence-media",
+      "description": "Full-width evidence media with a clear linked focus state.",
+      "html": "<a class=\"ds-evidence\" href=\"#\"><div role=\"img\" aria-label=\"Report evidence placeholder\">Report evidence</div></a>",
+      "css": ".ds-evidence { display: block; border-radius: 8px; color: #606168; text-decoration: none; overflow: hidden; } .ds-evidence div { display: grid; place-items: center; width: 100%; min-height: 180px; background: #faf8f8; border: 1px solid #e4e4e7; font: 500 13px/1.4 Figtree, sans-serif; } .ds-evidence:hover div { border-color: #c45c5c; } .ds-evidence:focus-visible { outline: 2px solid #a84848; outline-offset: 4px; }"
+    },
+    {
+      "name": "Operations Map",
+      "kind": "custom",
+      "refersTo": "evidence-media",
+      "description": "A thin-rule geographic surface with risk-coloured report markers, OSRM road geometry, a dashed route fallback and a visible legend.",
+      "html": "<div class=\"ds-map\" role=\"img\" aria-label=\"Operations map preview\"><span class=\"ds-map-marker ds-map-marker-high\"></span><span class=\"ds-map-marker ds-map-marker-disposal\"></span><div class=\"ds-map-legend\"><i></i>High risk <b></b>Disposal centre</div></div>",
+      "css": ".ds-map { position: relative; min-height: 240px; overflow: hidden; border: 1px solid #e4e4e7; border-radius: 8px; background: #faf8f8; font: 500 12px/1.4 Figtree, sans-serif; } .ds-map-marker { position: absolute; width: 22px; height: 22px; border: 3px solid #fff; box-shadow: 0 2px 7px rgb(36 37 41 / 38%); } .ds-map-marker-high { top: 70px; left: 38%; border-radius: 50%; background: #a84848; } .ds-map-marker-disposal { top: 125px; left: 68%; border-radius: 4px; background: #e8c547; transform: rotate(45deg) scale(.84); } .ds-map-legend { position: absolute; right: 12px; bottom: 12px; display: flex; align-items: center; gap: 7px; padding: 7px 9px; border: 1px solid #e4e4e7; border-radius: 6px; background: #fff; color: #606168; } .ds-map-legend i, .ds-map-legend b { width: 10px; height: 10px; border: 2px solid #fff; box-shadow: 0 0 0 1px rgb(36 37 41 / 35%); } .ds-map-legend i { border-radius: 50%; background: #a84848; } .ds-map-legend b { margin-left: 5px; border-radius: 2px; background: #e8c547; transform: rotate(45deg); } .ds-map:hover { border-color: #c45c5c; } .ds-map:focus-visible { outline: 2px solid #a84848; outline-offset: 4px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Selangor Operations Desk",
+    "overview": "This system extends Filament into a calm public-operations workspace. It keeps evidence, risk, ownership and the next valid action close together, with restrained red and gold cues that preserve the established Selangor identity without competing with case data. The interface favors compact summaries, thin structural rules and readable white or dark panels. Photographic evidence gets full available width; recommendations explain their simulated logic; responsibility and assignment remain visually distinct.",
+    "keyCharacteristics": ["Evidence-led investigation pages with a narrower coordination rail.", "Dense but calm summary strips and priority tables.", "Restrained red for navigation and actions, with gold reserved for warnings.", "Thin borders and tonal surfaces instead of decorative depth.", "Full-width operational mapping with responsive stacking below 1100px and a single-column coordination flow on phones."],
+    "rules": [
+      { "name": "The Evidence First Rule", "body": "Color supports status and action; it never overpowers report photographs or investigation facts.", "section": "colors" },
+      { "name": "The Two Accent Rule", "body": "Red owns identity and action, while gold is reserved for warnings and elevated operational attention.", "section": "colors" },
+      { "name": "The Operational Measure Rule", "body": "Narrative copy stops at 75ch; facts, tables and route comparisons may use the full panel width.", "section": "typography" },
+      { "name": "The Case Spine Rule", "body": "Evidence, reporter details, proof and history form one continuous main column; accountability and operational recommendations form the adjacent rail.", "section": "layout" },
+      { "name": "The Flat Operations Rule", "body": "Use borders and surface shifts for structure; do not introduce card stacks or decorative floating shadows.", "section": "elevation" },
+      { "name": "The Controlled Curve Rule", "body": "Reserve the 14px radius for bounded information surfaces; never turn every label or block into a pill.", "section": "shapes" }
+    ],
+    "dos": ["Do put risk, status and submission time at the top of every case.", "Do keep area ownership separate from the team assigned to a case.", "Do label fictional data, deterministic recommendations, road-route estimates and straight-line selection logic plainly.", "Do allow evidence media and operational tables to use the width they need.", "Do preserve usable focus states and 44px phone targets for custom actions.", "Do keep risk legends, map attribution and route fallback limitations visible beside every operational map."],
+    "donts": ["Don't imply that recommendations or route times use live AI, traffic conditions or dispatch data.", "Don't use gradients, ornamental illustration or large shadows in operations surfaces.", "Don't use color as the only signal for risk, status or errors.", "Don't compress report evidence into small decorative thumbnails.", "Don't merge the area owner and assigned clearance team into one ambiguous label.", "Don't present the dashed direct-line fallback as road navigation."]
+  }
+}

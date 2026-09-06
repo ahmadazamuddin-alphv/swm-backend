@@ -2,10 +2,8 @@
 
 namespace App\Filament\Resources\AdminNotifications\Tables;
 
+use App\Filament\Resources\Reports\ReportResource;
 use Filament\Actions\Action;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
 use Filament\Notifications\Notification;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -19,7 +17,6 @@ class AdminNotificationsTable
             ->columns([
                 TextColumn::make('title')->searchable(),
                 TextColumn::make('report.reference')->label('Report'),
-                TextColumn::make('user.name')->label('User'),
                 IconColumn::make('read_at')
                     ->label('Read')
                     ->boolean()
@@ -36,12 +33,12 @@ class AdminNotificationsTable
                         $record->markAsRead();
                         Notification::make()->title('Notification marked as read')->success()->send();
                     }),
-                EditAction::make(),
+                Action::make('investigate')
+                    ->label('Investigate')
+                    ->icon('heroicon-o-magnifying-glass')
+                    ->url(fn ($record) => ReportResource::getUrl('view', ['record' => $record->report_id])),
             ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
-            ]);
+            ->emptyStateHeading('No notifications yet')
+            ->emptyStateDescription('New simulated and citizen reports will appear here.');
     }
 }

@@ -219,7 +219,9 @@ class DatabaseSeeder extends Seeder
                 $sample,
             );
 
-            $recommender->applyToReport($report);
+            if ($report->wasRecentlyCreated) {
+                $recommender->applyToReport($report);
+            }
         }
 
         $assigned = Report::where('reference', 'RPT-DEMO0003')->first();
@@ -253,5 +255,6 @@ class DatabaseSeeder extends Seeder
 
         // Silence unused vars for static analysis friendliness
         unset($driverB, $centreA);
+        $this->call(OperationsDemoSeeder::class);
     }
 }

@@ -4,12 +4,14 @@ Government / operations backend for the **Illegal Dumping** POC (Hackathon: Siag
 
 | | |
 |---|---|
-| **Stack** | Laravel 12 + Filament 5 + PHP 8.2+ |
+| **Stack** | Laravel 12 + Filament 5 + Leaflet + OSRM + PHP 8.2+ |
 | **Panel** | `/` redirects to `/admin` |
 | **Theme** | Soft Selangor red (`#C45C5C`) + soft gold (`#E8C547`) |
 | **Pairs with** | Next.js citizen app |
 
 Full feature scope: [REQUIREMENTS.md](./REQUIREMENTS.md)
+
+Government operations walkthrough: [docs/government-operations-demo.md](./docs/government-operations-demo.md)
 
 ---
 

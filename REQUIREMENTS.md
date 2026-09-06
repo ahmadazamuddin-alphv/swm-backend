@@ -47,6 +47,8 @@ Change this before any shared or production environment.
 
 ## Government dashboard requirements
 
+The current hardcoded POC implements all nine items below in `/admin`. See the [government operations demo guide](./docs/government-operations-demo.md) for setup and the walkthrough. Recommendations use deterministic local fixtures. Interactive maps use OpenStreetMap tiles and request driving geometry from the public OSRM demo service; there is no live AI, geocoding, traffic feed or dispatch service.
+
 | # | Feature | Details |
 |---|---|---|
 | 1 | **New-report notifications** | Notify government users when a citizen submits a new waste report. |
@@ -57,7 +59,7 @@ Change this before any shared or production environment.
 | 6 | **Risk-based prioritisation** | Prioritise the queue by **risk score** so high-risk cases are handled first. |
 | 7 | **AI manpower & lorry recommendation** | Suggest manpower, number of lorries, and intervention deadline to clear the site. |
 | 8 | **Show responsible party** | Display which party owns the area and which party is assigned to act. |
-| 9 | **Suggest disposal route** | Suggest optimal route from dump site → nearest suitable disposal centre; help pick closest suitable party/vehicle to optimise budget. |
+| 9 | **Suggest disposal route** | Plot the selected depot → dump site → nearest suitable disposal centre on an interactive map; use straight-line distance to select the suitable driver and centre, then request a road route with distance and estimated driving time. |
 
 ---
 

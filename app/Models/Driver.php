@@ -16,7 +16,21 @@ class Driver extends Model
         'name',
         'phone',
         'vehicle_plate',
+        'base_latitude',
+        'base_longitude',
+        'is_available',
+        'accepted_category_ids',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'base_latitude' => 'float',
+            'base_longitude' => 'float',
+            'is_available' => 'boolean',
+            'accepted_category_ids' => 'array',
+        ];
+    }
 
     public function contractor(): BelongsTo
     {

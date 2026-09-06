@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Assignments\Tables;
 
+use App\Filament\Resources\Reports\ReportResource;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -23,6 +24,8 @@ class AssignmentsTable
                 TextColumn::make('status')->badge(),
             ])
             ->defaultSort('deadline')
+            ->description('Assign or reassign from a report investigation so its status and history stay together.')
+            ->recordUrl(fn ($record) => ReportResource::getUrl('view', ['record' => $record->report_id]))
             ->recordActions([
                 EditAction::make(),
             ])
