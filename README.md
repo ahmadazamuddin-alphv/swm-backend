@@ -40,6 +40,7 @@ php artisan key:generate
 # 3. Database (configure DB_* in .env for MySQL)
 php artisan migrate --seed
 php artisan storage:link
+# Demo pothole photos: public/demo/potholes → copied into storage on seed
 
 # 4. Run
 npm run build

@@ -8,11 +8,14 @@ use App\Enums\PotholeStatus;
 use App\Models\Contractor;
 use App\Models\PotholeCase;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 
 class PotholeCaseSeeder extends Seeder
 {
     public function run(): void
     {
+        $this->seedDemoPhotos();
+
         $alamFlora = Contractor::firstOrCreate(
             ['name' => 'Alam Flora Selangor'],
             [
@@ -287,6 +290,26 @@ class PotholeCaseSeeder extends Seeder
                 ['reference' => $case['reference']],
                 $case,
             );
+        }
+    }
+
+    /**
+     * Demo PNGs live in public/demo/potholes (tracked in git).
+     * Copy into storage so Filament /storage/... URLs keep working.
+     */
+    private function seedDemoPhotos(): void
+    {
+        $source = public_path('demo/potholes');
+        $destination = storage_path('app/public/potholes');
+
+        if (! File::isDirectory($source)) {
+            return;
+        }
+
+        File::ensureDirectoryExists($destination);
+
+        foreach (File::files($source) as $file) {
+            File::copy($file->getPathname(), $destination.DIRECTORY_SEPARATOR.$file->getFilename());
         }
     }
 }
