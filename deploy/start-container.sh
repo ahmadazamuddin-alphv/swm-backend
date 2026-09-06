@@ -2,6 +2,7 @@
 
 set -eu
 
+find /app/bootstrap/cache -type f -name '*.php' -delete
 cp /app/database/demo.sqlite /tmp/siaga-demo.sqlite
 cp /app/.env.example /app/.env
 
@@ -17,6 +18,7 @@ export LOG_CHANNEL=stderr
 
 php artisan key:generate --force --no-interaction
 php artisan package:discover --ansi
+php artisan filament:assets --no-interaction --quiet
 php artisan optimize:clear
 
-exec php -S 0.0.0.0:8080 -t public public/index.php
+exec php -S 0.0.0.0:8080 -t public deploy/router.php

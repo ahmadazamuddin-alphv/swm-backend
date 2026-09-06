@@ -26,6 +26,7 @@ FROM php-base AS runtime
 
 COPY . .
 COPY --from=php-dependencies /app/vendor ./vendor
+COPY --from=frontend-assets /app/node_modules ./node_modules
 COPY --from=frontend-assets /app/public/build ./public/build
 COPY deploy/start-container.sh /usr/local/bin/start-container
 
