@@ -173,7 +173,20 @@
 .swm-leaflet-marker-elevated span { background: var(--swm-gold); }
 .swm-leaflet-marker-standard span { background: #71717a; }
 .swm-leaflet-marker-driver span { background: #3f3f46; border-radius: 4px; }
-.swm-leaflet-marker-disposal span { background: var(--swm-gold); border-radius: 4px; transform: rotate(45deg) scale(.84); }
+.swm-leaflet-marker-gdp span { background: var(--swm-red-deep); }
+.swm-leaflet-marker-rakyat span { background: var(--swm-gold); color: #2a2410; }
+.swm-leaflet-marker-balanced span { background: #6b9b6e; }
+.swm-leaflet-marker-pothole span {
+    display: grid;
+    place-items: center;
+    font-size: .65rem;
+    font-weight: 700;
+    color: #fff;
+}
+.swm-leaflet-marker.is-selected span {
+    outline: 3px solid var(--swm-gold);
+    outline-offset: 2px;
+}
 .swm-map-popup { display: flex; min-width: 180px; flex-direction: column; gap: 4px; font-family: Figtree, ui-sans-serif, system-ui, sans-serif; }
 .swm-map-popup strong { font-size: .875rem; }
 .swm-map-popup span, .swm-map-popup small { color: #52525b; font-size: .75rem; line-height: 1.45; }
@@ -218,4 +231,200 @@
     .swm-map-canvas { height: 340px; }
     .swm-map-route .swm-map-canvas { height: 290px; }
     .swm-map-legend { gap: 9px 14px; }
+}
+
+/* —— Potholes operations dashboard —— */
+.swm-potholes { display: flex; flex-direction: column; gap: 16px; }
+.swm-budget-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 12px; }
+.swm-budget-head h2 { margin: 0 0 4px; }
+.swm-budget-head strong { font-size: 1.5rem; font-weight: 650; color: var(--swm-red-deep); font-variant-numeric: tabular-nums; }
+.swm-meter { height: 10px; border-radius: 999px; background: var(--swm-red-soft); overflow: hidden; }
+.swm-meter-sm { height: 8px; }
+.swm-meter-fill { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--swm-red), var(--swm-red-deep)); }
+.swm-budget-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 14px 0 0; }
+.swm-budget-stats dt { font-size: .75rem; color: var(--swm-muted); }
+.swm-budget-stats dd { font-size: 1.125rem; font-weight: 650; margin: 2px 0 0; font-variant-numeric: tabular-nums; }
+.swm-tabs { display: flex; align-items: center; gap: 8px; }
+.swm-tabs button { border: 1px solid var(--swm-line); background: var(--swm-surface); color: var(--swm-ink); border-radius: 999px; padding: 8px 16px; font-size: .8125rem; font-weight: 600; cursor: pointer; }
+.swm-tabs button.is-active { background: var(--swm-red); border-color: var(--swm-red); color: #fff; }
+.swm-tabs-link { margin-left: auto; color: var(--swm-red-deep); font-size: .8125rem; font-weight: 600; }
+.swm-potholes-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(300px, 1fr); gap: 16px; align-items: start; }
+.swm-potholes-side { display: flex; flex-direction: column; gap: 16px; min-width: 0; align-self: stretch; }
+.swm-potholes-side > .swm-panel { flex: 1; min-height: 0; }
+.swm-panel-hint { font-size: .75rem; margin: 0 0 8px; }
+.swm-impact-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+.swm-impact-header h2 { margin: 0 0 4px; }
+.swm-impact-panel .swm-section-heading { margin-bottom: 12px; }
+.swm-priority-item p { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.swm-ph-map { position: relative; height: 360px; border-radius: 10px; border: 1px solid var(--swm-line); background:
+    linear-gradient(160deg, #f7f1f1 0%, #efe8e0 45%, #e8eef2 100%);
+    overflow: hidden; }
+.swm-ph-pin { position: absolute; transform: translate(-50%, -50%); width: 28px; height: 28px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 2px 6px rgb(36 37 41 / 30%); cursor: pointer; padding: 0; display: grid; place-items: center; font-size: .65rem; font-weight: 700; color: #fff; }
+.swm-ph-pin-gdp { background: var(--swm-red-deep); }
+.swm-ph-pin-rakyat { background: #c9a227; color: #2a2410; }
+.swm-ph-pin-balanced { background: #6b9b6e; }
+.swm-ph-pin.is-selected { outline: 3px solid var(--swm-gold); outline-offset: 2px; z-index: 2; }
+.swm-ph-map-label { position: absolute; font-size: .7rem; font-weight: 650; color: var(--swm-muted); background: rgb(255 255 255 / 80%); padding: 4px 8px; border-radius: 6px; }
+.swm-ph-map-label-klang { left: 10%; top: 62%; }
+.swm-ph-map-label-pj { right: 12%; top: 28%; }
+.swm-priority-list { list-style: none; margin: 0; padding: 0; }
+.swm-priority-list li + li { border-top: 1px solid var(--swm-line); }
+.swm-priority-item { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 12px; align-items: start; width: 100%; text-align: left; padding: 12px 4px; cursor: pointer; border-radius: 8px; background: transparent; border: 0; color: inherit; }
+.swm-priority-thumb { width: 64px; height: 64px; object-fit: cover; border-radius: 8px; border: 1px solid var(--swm-line); background: var(--swm-wash); }
+.swm-priority-thumb-empty { display: block; }
+.swm-priority-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 2px; font-size: .75rem; }
+.swm-stat-pill {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 2px 9px;
+    font-size: .72rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.01em;
+    border: 1px solid transparent;
+}
+.swm-stat-pill-budget {
+    background: #f4f4f5;
+    border-color: #e4e4e7;
+    color: #3f3f46;
+}
+.swm-stat-pill-score {
+    background: var(--swm-red-soft);
+    border-color: #e2b4b4;
+    color: var(--swm-red-deep);
+}
+.swm-stat-pill.swm-tip { border-bottom-style: solid; }
+.swm-impact-photo { margin: 0 0 14px; }
+.swm-impact-photo img { display: block; width: 100%; max-height: 180px; object-fit: cover; border-radius: 10px; border: 1px solid var(--swm-line); }
+.swm-priority-item:hover, .swm-priority-item.is-selected { background: var(--swm-wash); }
+.swm-priority-top { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+.swm-priority-item p { margin: 4px 0 0; font-size: .8125rem; line-height: 1.5; color: var(--swm-muted); }
+.swm-chip { font-size: .7rem; font-weight: 650; border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
+.swm-chip-gdp { background: var(--swm-red-soft); color: var(--swm-red-deep); }
+.swm-chip-rakyat { background: var(--swm-gold-soft); color: #7a6418; }
+.swm-chip-balanced { background: #e5f0e6; color: #3d6b40; }
+.swm-tip { position: relative; cursor: help; border-bottom: 1px dotted currentColor; }
+.swm-tip::after {
+    content: attr(data-tip);
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 8px);
+    transform: translateX(-50%) translateY(4px);
+    width: min(260px, 70vw);
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: #242529;
+    color: #fff;
+    font-size: .7rem;
+    font-weight: 500;
+    line-height: 1.45;
+    text-align: left;
+    white-space: normal;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .15s ease, transform .15s ease;
+    z-index: 40;
+    box-shadow: 0 6px 18px rgb(36 37 41 / 25%);
+}
+.swm-tip::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 2px);
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #242529;
+    opacity: 0;
+    transition: opacity .15s ease;
+    z-index: 40;
+}
+.swm-tip:hover::after,
+.swm-tip:focus-visible::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+.swm-tip:hover::before,
+.swm-tip:focus-visible::before {
+    opacity: 1;
+}
+.swm-map-legend .swm-tip { border-bottom: 0; }
+.swm-map-legend .swm-tip::after { left: 0; transform: translateX(0) translateY(4px); }
+.swm-map-legend .swm-tip:hover::after,
+.swm-map-legend .swm-tip:focus-visible::after { transform: translateX(0) translateY(0); }
+.swm-map-legend .swm-tip::before { left: 16px; }
+.swm-risk-badge { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 14px; border-radius: 10px; background: var(--swm-wash); border: 1px solid var(--swm-line); margin-bottom: 14px; }
+.swm-risk-badge strong { font-size: 1.5rem; color: var(--swm-red-deep); }
+.swm-meters { display: flex; flex-direction: column; gap: 12px; margin-bottom: 14px; }
+.swm-meter-label { display: flex; justify-content: space-between; font-size: .75rem; color: var(--swm-muted); margin-bottom: 4px; }
+.swm-impact-deltas { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 0 0 10px; }
+.swm-impact-deltas dt { font-size: .75rem; color: var(--swm-muted); }
+.swm-impact-deltas dd { font-size: 1.25rem; font-weight: 650; margin: 2px 0 0; }
+.swm-impact-reason, .swm-spend-line { font-size: .8125rem; line-height: 1.55; margin: 0 0 8px; }
+.swm-spend-line { padding: 10px 12px; border-radius: 8px; background: var(--swm-gold-soft); }
+.swm-forecast-grid { display: grid; grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr); gap: 16px; align-items: start; }
+.swm-presets { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.swm-presets button { border: 1px solid var(--swm-line); background: var(--swm-surface); border-radius: 8px; padding: 8px 12px; font-size: .75rem; font-weight: 600; cursor: pointer; }
+.swm-presets button.is-active { border-color: var(--swm-red); background: var(--swm-red-soft); color: var(--swm-red-deep); }
+.swm-sliders { display: flex; flex-direction: column; gap: 14px; }
+.swm-sliders label { display: flex; flex-direction: column; gap: 6px; font-size: .8125rem; }
+.swm-sliders input[type=range] { width: 100%; accent-color: var(--swm-red); }
+.swm-forecast-kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 18px; }
+.swm-forecast-kpis div { padding: 14px; border: 1px solid var(--swm-line); border-radius: 10px; background: var(--swm-wash); }
+.swm-forecast-kpis span { display: block; font-size: .75rem; color: var(--swm-muted); }
+.swm-forecast-kpis strong { font-size: 1.75rem; font-weight: 650; font-variant-numeric: tabular-nums; }
+.swm-severity-mix h3, .swm-corridor-pressure h3 { font-size: .8125rem; color: var(--swm-muted); font-weight: 500; margin: 0 0 10px; }
+.swm-severity-bars { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+.swm-severity-bars > div { display: grid; grid-template-columns: 64px 1fr 36px; gap: 8px; align-items: center; font-size: .75rem; }
+.swm-sev-low { background: #6b9b6e; }
+.swm-sev-medium { background: var(--swm-gold); }
+.swm-sev-high { background: var(--swm-red-deep); }
+.swm-corridor-row { margin-bottom: 12px; }
+.swm-corridor-row small { margin-top: 4px; }
+@media (max-width: 1100px) {
+    .swm-potholes-grid, .swm-forecast-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+    .swm-budget-stats { grid-template-columns: 1fr; }
+    .swm-ph-map { height: 280px; }
+}
+
+/* —— Pothole case detail —— */
+.swm-pothole-detail { display: flex; flex-direction: column; gap: 16px; }
+.swm-pothole-hero, .swm-pothole-analytics { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 16px; align-items: stretch; }
+.swm-pothole-photo-card { padding: 12px; }
+.swm-pothole-photo-card img { display: block; width: 100%; height: 280px; object-fit: cover; border-radius: 10px; }
+.swm-pothole-photo-empty { display: grid; place-items: center; height: 280px; border-radius: 10px; background: var(--swm-wash); color: var(--swm-muted); font-size: .875rem; }
+.swm-pothole-summary-top { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; margin-bottom: 16px; }
+.swm-pothole-summary h2 { margin: 0; font-size: 1.25rem; line-height: 1.35; }
+.swm-kicker { margin: 0 0 4px; font-size: .75rem; }
+.swm-pothole-badges { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+.swm-chip-status { background: var(--swm-red-soft); color: var(--swm-red-deep); }
+.swm-pothole-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; margin: 0 0 14px; }
+.swm-pothole-facts dt { font-size: .7rem; color: var(--swm-muted); margin-bottom: 2px; }
+.swm-pothole-facts dd { margin: 0; font-size: .9375rem; font-weight: 650; font-variant-numeric: tabular-nums; }
+.swm-pothole-ai { margin-bottom: 16px; }
+.swm-meters-tight { gap: 10px; }
+.swm-impact-scores { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 12px; }
+.swm-impact-score { display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--swm-line); background: var(--swm-wash); }
+.swm-impact-score > span { font-size: .75rem; font-weight: 650; }
+.swm-impact-score strong { font-size: 1.75rem; line-height: 1.1; font-weight: 700; font-variant-numeric: tabular-nums; }
+.swm-impact-score small { font-size: .7rem; color: var(--swm-muted); }
+.swm-impact-score-rakyat { border-top: 3px solid var(--swm-gold); }
+.swm-impact-score-rakyat > span, .swm-impact-score-rakyat strong { color: #7a6418; }
+.swm-impact-score-gdp { border-top: 3px solid var(--swm-red); }
+.swm-impact-score-gdp > span, .swm-impact-score-gdp strong { color: var(--swm-red-deep); }
+.swm-compare-chart { display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; }
+.swm-compare-row { display: grid; grid-template-columns: 52px minmax(0, 1fr) 28px; gap: 8px; align-items: center; }
+.swm-compare-label { font-size: .75rem; color: var(--swm-muted); }
+.swm-compare-track { height: 12px; border-radius: 999px; background: var(--swm-wash); border: 1px solid var(--swm-line); overflow: hidden; }
+.swm-compare-bar { height: 100%; border-radius: inherit; }
+.swm-compare-bar-rakyat { background: linear-gradient(90deg, #e8c547, #c9a227); }
+.swm-compare-bar-gdp { background: linear-gradient(90deg, #c45c5c, #a84848); }
+.swm-compare-row strong { font-size: .8125rem; font-variant-numeric: tabular-nums; text-align: right; }
+.swm-contractor-line { margin: 0 0 8px; font-size: .8125rem; }
+.swm-contractor-meta { color: var(--swm-red-deep); font-weight: 600; }
+@media (max-width: 1100px) {
+    .swm-pothole-hero, .swm-pothole-analytics { grid-template-columns: minmax(0, 1fr); }
+    .swm-pothole-photo-card img, .swm-pothole-photo-empty { height: 220px; }
 }

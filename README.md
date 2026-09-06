@@ -68,6 +68,19 @@ php artisan migrate:fresh --seed
 
 ---
 
+## Potholes operations (admin)
+
+Nested under **Operations overview** in the sidebar:
+
+| URL | Purpose |
+|---|---|
+| `/admin/potholes` | Budget meter, Cases \| Forecast tabs, spend priority, impact panel |
+| `/admin/pothole-cases` | Full CRUD for pothole cases |
+
+Demo budget: **RM 18,000,000** annual; spent from in-progress/solved `budget_spent_rm` (~RM 2.7M seeded).
+
+---
+
 ## Citizen API (Next.js)
 
 Base path: `/api`
