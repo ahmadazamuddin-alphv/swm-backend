@@ -32,7 +32,9 @@ COPY deploy/start-container.sh /usr/local/bin/start-container
 
 RUN chmod +x /usr/local/bin/start-container \
     && mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views storage/logs bootstrap/cache \
-    && chmod -R ug+rwX storage bootstrap/cache
+    && chmod -R ug+rwX storage bootstrap/cache \
+    && find /app/bootstrap/cache -type f -name '*.php' -delete \
+    && php artisan filament:assets --no-interaction --quiet
 
 EXPOSE 8080
 

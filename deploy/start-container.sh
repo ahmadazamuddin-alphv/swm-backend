@@ -18,7 +18,6 @@ export LOG_CHANNEL=stderr
 
 php artisan key:generate --force --no-interaction
 php artisan package:discover --ansi
-php artisan filament:assets --no-interaction --quiet
 php artisan optimize:clear
 
 exec php -S 0.0.0.0:8080 -t public deploy/router.php
