@@ -13,11 +13,13 @@ use Filament\Support\Icons\Heroicon;
 
 class PotholesDashboard extends Page
 {
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedMapPin;
 
     protected static ?string $navigationLabel = 'Potholes dashboard';
 
-    protected static ?string $navigationParentItem = 'Operations overview';
+    protected static string|\UnitEnum|null $navigationGroup = 'Potholes';
 
     protected static ?int $navigationSort = 1;
 

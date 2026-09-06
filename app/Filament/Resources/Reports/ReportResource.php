@@ -25,7 +25,11 @@ class ReportResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Operations';
 
+    protected static ?string $navigationParentItem = 'Illegal dumping';
+
     protected static ?int $navigationSort = 1;
+
+    protected static ?string $navigationLabel = 'Reports';
 
     protected static ?string $recordTitleAttribute = 'reference';
 

@@ -1,11 +1,26 @@
-/* Selangor Waste Management — soft red + gold accents */
+/* Siaga Selangor — operations console */
 
 :root {
-    --swm-red: #c45c5c;
-    --swm-red-soft: #f3e0e0;
-    --swm-red-deep: #a84848;
-    --swm-gold: #e8c547;
-    --swm-gold-soft: #f8efc8;
+    --swm-red: #d2222b;
+    --swm-red-soft: #f8d8d4;
+    --swm-red-deep: #a91824;
+    --swm-gold: #fdb915;
+    --swm-gold-soft: #ffedbd;
+    --swm-cream: #fff8ea;
+    --swm-map-blue: #a9def9;
+    --swm-map-cyan: #06b6d4;
+}
+
+button:not(:disabled),
+a[href],
+[role="button"]:not([aria-disabled="true"]),
+summary {
+    cursor: pointer;
+}
+
+button:disabled,
+[aria-disabled="true"] {
+    cursor: not-allowed;
 }
 
 /* Brand */
@@ -16,13 +31,15 @@
 }
 
 .fi-topbar {
-    border-bottom: 2px solid var(--swm-red-soft) !important;
+    border-bottom: 1px solid #ead9b8 !important;
+    background: rgb(255 248 234 / 88%) !important;
+    backdrop-filter: blur(14px);
 }
 
 /* Active sidebar “tab” */
 .fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
-    background-color: var(--swm-red-deep) !important;
-    box-shadow: 0 1px 2px rgb(196 92 92 / 25%);
+    background-color: var(--swm-red) !important;
+    box-shadow: 0 8px 18px rgb(210 34 43 / 22%);
 }
 
 .fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-icon,
@@ -39,7 +56,7 @@
 
 /* Hover on other nav items */
 .fi-sidebar-item-has-url:not(.fi-active) > .fi-sidebar-item-btn:hover {
-    background-color: var(--swm-red-soft) !important;
+    background-color: #ffedbd !important;
 }
 
 .fi-sidebar-item-has-url:not(.fi-active) > .fi-sidebar-item-btn:hover > .fi-icon,
@@ -54,10 +71,30 @@
     letter-spacing: 0.02em;
 }
 
-/* Page title accent */
-.fi-header-heading {
-    color: var(--swm-red-deep) !important;
+/* Operation parents are interactive accordions. Keep their label and chevron
+   aligned like standard navigation rows, then inset only their children. */
+.swm-sidebar-parent > .fi-sidebar-item-btn {
+    width: 100%;
+    justify-content: flex-start;
+    text-align: left;
 }
+
+.swm-sidebar-parent > .fi-sidebar-item-btn > .fi-sidebar-item-label {
+    text-align: left;
+}
+
+.swm-sidebar-parent > .fi-sidebar-sub-group-items {
+    margin: 0.25rem 0 0.25rem 2.25rem;
+}
+
+.swm-sidebar-parent > .fi-sidebar-sub-group-items .fi-sidebar-item-btn {
+    width: 100%;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+/* Page title accent */
+.fi-header-heading { color: #17100b !important; }
 
 /* Soft card polish */
 .fi-wi-stats-overview-stat,
@@ -69,6 +106,9 @@
 
 .fi-wi-stats-overview-stat {
     border-top: 3px solid var(--swm-red) !important;
+    background: rgb(255 248 234 / 92%) !important;
+    border-radius: 18px !important;
+    box-shadow: 0 12px 26px rgb(64 35 10 / 8%);
 }
 
 /* Primary buttons already use theme; reinforce */
@@ -80,6 +120,162 @@
 .fi-badge.fi-color-warning {
     background-color: var(--swm-gold-soft) !important;
 }
+
+/* Shared operations shell. The mosque image is deliberately quiet, so tables remain readable. */
+.fi-body {
+    background:
+        radial-gradient(ellipse at 10% 0%, rgb(253 185 21 / 18%), transparent 38%),
+        radial-gradient(ellipse at 95% 15%, rgb(210 34 43 / 12%), transparent 42%),
+        linear-gradient(rgb(248 241 229 / 88%), rgb(248 241 229 / 96%)),
+        url('/brand/selangor-mosque.jpg') center / cover fixed !important;
+}
+
+.fi-sidebar {
+    background: rgb(255 248 234 / 94%) !important;
+    border-right: 1px solid #ead9b8 !important;
+    backdrop-filter: blur(16px);
+}
+
+.fi-sidebar-header {
+    border-bottom: 1px solid #ead9b8 !important;
+}
+
+.fi-sidebar-header .fi-logo {
+    display: flex;
+    align-items: center;
+    min-height: 3.75rem;
+}
+
+.fi-main {
+    max-width: 100rem !important;
+}
+
+.fi-section,
+.fi-ta-ctn,
+.fi-wi-table,
+.fi-page-content > .fi-section {
+    border-color: #ead9b8 !important;
+    background: rgb(255 248 234 / 92%) !important;
+    border-radius: 18px !important;
+    box-shadow: 0 12px 26px rgb(64 35 10 / 7%);
+}
+
+/* Table widgets share rows with variable-height dashboard panels. Keep each table
+   at its natural height instead of stretching beneath a short result set. */
+.fi-wi-table {
+    align-self: start;
+}
+
+.fi-btn.fi-color-primary {
+    --c-400: #d2222b;
+    --c-500: #d2222b;
+    --c-600: #a91824;
+    background-color: #d2222b !important;
+    border-color: #d2222b !important;
+    color: #ffffff !important;
+}
+
+.fi-btn.fi-color-primary :is(.fi-btn-label, .fi-icon) {
+    color: #ffffff !important;
+}
+
+.fi-btn.fi-color-primary:hover {
+    background-color: #a91824 !important;
+    border-color: #a91824 !important;
+}
+
+/* The dashboard services share the same compact segmented control as the
+   citizen map. Header actions remain available beside it. */
+.fi-header-actions-ctn .swm-service-toggle {
+    min-height: 3.25rem;
+    border: 1px solid #ead9b8 !important;
+    box-shadow: none !important;
+    font-size: .95rem;
+}
+
+.fi-header-actions-ctn .swm-service-toggle-dumping {
+    margin-right: -.75rem;
+    border-radius: 999px 0 0 999px !important;
+}
+
+.fi-header-actions-ctn .swm-service-toggle-potholes {
+    margin-right: .75rem;
+    border-left: 0 !important;
+    border-radius: 0 999px 999px 0 !important;
+}
+
+.fi-header-actions-ctn .swm-service-toggle:not(.swm-service-toggle-active) {
+    background: rgb(255 255 255 / 94%) !important;
+    color: #5f4c3c !important;
+}
+
+.fi-header-actions-ctn .swm-service-toggle:not(.swm-service-toggle-active) :is(.fi-btn-label, .fi-icon) {
+    color: #5f4c3c !important;
+}
+
+.fi-header-actions-ctn .swm-service-toggle-active {
+    background: var(--swm-red) !important;
+    border-color: var(--swm-red) !important;
+    color: #fff !important;
+}
+
+.fi-header-actions-ctn .swm-service-toggle-active:hover {
+    background: var(--swm-red-deep) !important;
+    border-color: var(--swm-red-deep) !important;
+}
+
+.fi-input-wrp,
+.fi-select-input,
+.fi-fo-field-wrp .fi-input {
+    border-color: #ead9b8 !important;
+    background: rgb(255 255 255 / 84%) !important;
+}
+
+/* Login: a focused operations entry point with the same citizen-facing identity. */
+.fi-simple-layout {
+    min-height: 100dvh;
+    background:
+        linear-gradient(105deg, rgb(23 16 11 / 72%), rgb(23 16 11 / 28%)),
+        url('/brand/selangor-mosque.jpg') center / cover;
+}
+
+.fi-simple-main-ctn { align-items: center; }
+
+.fi-simple-main {
+    width: min(100% - 2rem, 30rem) !important;
+    padding: 2rem !important;
+    border: 1px solid rgb(255 248 234 / 72%);
+    border-radius: 28px;
+    background: rgb(255 248 234 / 94%);
+    box-shadow: 0 28px 70px rgb(23 16 11 / 38%);
+    backdrop-filter: blur(16px);
+}
+
+.fi-simple-main .fi-logo {
+    margin-inline: auto;
+    margin-bottom: 1.5rem;
+}
+
+.swm-login-intro {
+    margin: 0 0 1.5rem;
+    text-align: left;
+}
+.swm-login-intro p {
+    margin: 0;
+    color: var(--swm-red-deep);
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+.swm-login-intro h1 {
+    margin: .4rem 0;
+    color: #17100b;
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -.035em;
+}
+.swm-login-intro span { color: #6e5c4b; font-size: .875rem; line-height: 1.6; }
 
 /* The operations screens extend Filament's existing red/gold system. */
 :root {
@@ -115,6 +311,17 @@
 .swm-overview-item > span { font-size: .875rem; color: var(--swm-muted); }
 .swm-overview-item strong { font-size: 2rem; line-height: 1.2; font-weight: 650; font-variant-numeric: tabular-nums; }
 .swm-overview-item small { font-size: .75rem; color: var(--swm-muted); }
+.swm-pothole-overview { display: flex; flex-direction: column; gap: 24px; }
+.swm-pothole-overview-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr); gap: 24px; align-items: start; }
+.swm-forecast-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 14px 0; }
+.swm-forecast-stats > div { padding: 12px 14px; border: 1px solid var(--swm-line); border-radius: 10px; background: var(--swm-wash); }
+.swm-forecast-stats dt { color: var(--swm-muted); font-size: .75rem; }
+.swm-forecast-stats dd { margin: 4px 0 0; font-size: 1.25rem; font-weight: 650; font-variant-numeric: tabular-nums; }
+.swm-corridor-list { display: grid; gap: 12px; padding: 0; margin: 0; list-style: none; }
+.swm-corridor-list li { display: grid; gap: 5px; }
+.swm-corridor-list li > div:first-child { display: flex; justify-content: space-between; gap: 10px; font-size: .8125rem; }
+.swm-corridor-list li > div:first-child span { color: var(--swm-red-deep); font-weight: 650; font-variant-numeric: tabular-nums; }
+.swm-corridor-list small { color: var(--swm-muted); font-size: .72rem; line-height: 1.45; }
 .swm-text-button { color: var(--swm-red-deep); font-size: .8125rem; font-weight: 600; text-underline-offset: 4px; cursor: pointer; }
 .swm-text-button:hover { text-decoration: underline; }
 .swm-inbox-list { padding: 0; margin: 16px 0; list-style: none; }
@@ -148,8 +355,11 @@
 .swm-overdue, .swm-error { color: var(--swm-red-deep); }
 .swm-map-panel .swm-section-heading { margin-bottom: 18px; }
 .swm-map-panel .swm-section-heading p { margin: 3px 0 0; }
-.swm-map { position: relative; display: block; min-width: 0; border: 1px solid var(--swm-line); border-radius: 8px; overflow: hidden; background: var(--swm-wash); }
+.swm-map { position: relative; display: block; min-width: 0; border: 1px solid #ead9b8; border-radius: 18px; overflow: hidden; background: var(--swm-wash); box-shadow: 0 12px 26px rgb(64 35 10 / 8%); }
 .swm-map-canvas { width: 100%; height: 430px; background: var(--swm-wash); }
+.swm-map .maplibregl-ctrl-top-right { top: 4px; right: 4px; }
+.swm-map .maplibregl-popup-content { padding: 14px; border: 1px solid #ead9b8; border-radius: 14px; background: #fff8ea; box-shadow: 0 14px 30px rgb(64 35 10 / 18%); }
+.swm-map .maplibregl-popup-tip { border-top-color: #fff8ea; }
 .swm-map-route { margin: 18px 0 0; }
 .swm-map-route .swm-map-canvas { height: 330px; }
 .swm-map-status { position: absolute; z-index: 500; top: 12px; left: 50%; transform: translateX(-50%); width: max-content; max-width: calc(100% - 24px); margin: 0; padding: 7px 10px; border: 1px solid var(--swm-line); border-radius: 6px; background: rgb(255 255 255 / 92%); color: #3f3f46; font-size: .75rem !important; line-height: 1.4 !important; text-align: center; }
@@ -169,9 +379,11 @@
 .swm-map .leaflet-control-attribution { font-size: 10px; }
 .swm-leaflet-marker { background: transparent; border: 0; }
 .swm-leaflet-marker span { display: block; width: 22px; height: 22px; margin: 4px; border: 3px solid #fff; border-radius: 50%; box-shadow: 0 2px 7px rgb(36 37 41 / 38%); }
+.swm-leaflet-marker span[data-label] { display: grid; place-items: center; color: #fff; font-size: .7rem; font-weight: 700; line-height: 1; }
 .swm-leaflet-marker-high span { background: var(--swm-red-deep); }
 .swm-leaflet-marker-elevated span { background: var(--swm-gold); }
 .swm-leaflet-marker-standard span { background: #71717a; }
+.swm-leaflet-marker-disposal span { background: #FDB915; border-radius: 5px; transform: rotate(45deg); }
 .swm-leaflet-marker-driver span { background: #3f3f46; border-radius: 4px; }
 .swm-leaflet-marker-gdp span { background: var(--swm-red-deep); }
 .swm-leaflet-marker-rakyat span { background: var(--swm-gold); color: #2a2410; }
@@ -271,6 +483,7 @@
     .swm-cctv-workspace .swm-cctv-video-shell { max-height: 430px; }
 }
 @media (max-width: 1100px) {
+    .swm-pothole-overview-grid { grid-template-columns: minmax(0, 1fr); }
     .swm-case-grid { grid-template-columns: minmax(0, 1fr); }
     .swm-case-side { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
     .swm-cctv-review-grid { grid-template-columns: minmax(0, 1fr); }
@@ -569,4 +782,46 @@
 @media (max-width: 1100px) {
     .swm-pothole-hero, .swm-pothole-analytics { grid-template-columns: minmax(0, 1fr); }
     .swm-pothole-photo-card img, .swm-pothole-photo-empty { height: 220px; }
+}
+
+/* Analytics: compact officer-facing charts with the same map-inspired palette. */
+.swm-analytics { display: grid; gap: 1rem; }
+.swm-analytics-filter { display: flex; gap: 1.5rem; align-items: end; justify-content: space-between; }
+.swm-analytics-filter h2 { margin: .15rem 0; }
+.swm-eyebrow { margin: 0; color: var(--swm-red-deep); font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.swm-analytics-controls { display: flex; gap: .75rem; flex-wrap: wrap; }
+.swm-analytics-controls label { display: grid; gap: .32rem; color: var(--swm-muted); font-size: .75rem; font-weight: 600; }
+.swm-analytics-controls select { min-width: 11rem; border: 1px solid #ead9b8; border-radius: .75rem; background: #fff; color: var(--swm-ink); padding: .65rem .8rem; }
+.swm-analytics-chart { min-height: 26rem; }
+.swm-analytics-legend { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0; color: var(--swm-muted); font-size: .8rem; }
+.swm-analytics-key { display: inline-flex; gap: .4rem; align-items: center; }
+.swm-analytics-key i { width: .7rem; height: .7rem; border-radius: 99px; background: #9ca3af; }
+.swm-analytics-key-high i, .swm-priority-segment.swm-analytics-key-high { background: var(--swm-red); }
+.swm-analytics-key-elevated i, .swm-priority-segment.swm-analytics-key-elevated { background: var(--swm-gold); }
+.swm-analytics-key-standard i, .swm-priority-segment.swm-analytics-key-standard { background: var(--swm-map-cyan); }
+.swm-analytics-key-critical i, .swm-priority-segment.swm-analytics-key-critical { background: #7f1d1d; }
+.swm-analytics-key-medium i, .swm-priority-segment.swm-analytics-key-medium { background: #fb923c; }
+.swm-analytics-key-low i, .swm-priority-segment.swm-analytics-key-low { background: #6b9b6e; }
+.swm-analytics-key.is-received i, .swm-performance-columns .is-received { background: var(--swm-gold); }
+.swm-analytics-key.is-resolved i, .swm-performance-columns .is-resolved { background: var(--swm-red); }
+.swm-priority-bars { display: grid; gap: 1rem; margin-top: 1.75rem; }
+.swm-priority-bar-row { display: grid; grid-template-columns: minmax(9rem, 13rem) minmax(7rem, 1fr) 2rem; gap: .75rem; align-items: center; }
+.swm-priority-bar-row > strong { font-size: .85rem; }
+.swm-priority-bar-row > span { color: var(--swm-muted); font-size: .8rem; text-align: right; }
+.swm-priority-track { display: flex; min-height: 1.55rem; overflow: hidden; border-radius: 99px; background: #f3eadc; }
+.swm-priority-segment { min-width: .25rem; transition: width .25s ease; }
+.swm-performance-bars { display: flex; min-height: 18rem; gap: .75rem; align-items: end; justify-content: space-between; padding: 1.25rem 0 .25rem; border-bottom: 1px solid var(--swm-line); }
+.swm-performance-week { display: grid; flex: 1; gap: .45rem; text-align: center; }
+.swm-performance-week strong { font-size: .75rem; }
+.swm-performance-week small { min-height: 1rem; color: var(--swm-muted); font-size: .68rem; }
+.swm-performance-columns { display: flex; height: 14rem; gap: .32rem; align-items: end; justify-content: center; }
+.swm-performance-columns span { width: min(2rem, 42%); min-height: .35rem; border-radius: .45rem .45rem 0 0; }
+.swm-analytics-map { display: block; height: 23rem; overflow: hidden; border: 1px solid #ead9b8; border-radius: 1rem; }
+.swm-analytics-map > div { height: 100%; }
+@media (max-width: 42rem) {
+    .swm-analytics-filter { align-items: stretch; flex-direction: column; }
+    .swm-analytics-controls { display: grid; grid-template-columns: 1fr 1fr; }
+    .swm-analytics-controls select { min-width: 0; width: 100%; }
+    .swm-priority-bar-row { grid-template-columns: 6.25rem minmax(5rem, 1fr) 1.5rem; gap: .45rem; }
+    .swm-priority-bar-row > strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 }

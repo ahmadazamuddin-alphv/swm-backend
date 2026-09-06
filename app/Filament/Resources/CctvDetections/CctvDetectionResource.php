@@ -22,7 +22,9 @@ class CctvDetectionResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedVideoCamera;
 
-    protected static string|\UnitEnum|null $navigationGroup = 'CCTV POC';
+    protected static string|\UnitEnum|null $navigationGroup = 'Operations';
+
+    protected static ?string $navigationParentItem = 'Illegal dumping';
 
     protected static ?int $navigationSort = 1;
 

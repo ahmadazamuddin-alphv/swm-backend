@@ -120,6 +120,61 @@ class DatabaseSeeder extends Seeder
             ],
         );
 
+        $zoneDengkil = Zone::firstOrCreate(
+            ['name' => 'Dengkil Demonstration Area'],
+            [
+                'postcode' => '43800',
+                'taman' => 'Bukit Damar',
+                'area_type' => AreaType::Industrial,
+                'socioeconomic_group' => SocioeconomicGroup::B40,
+                'responsible_party_id' => $dept->id,
+            ],
+        );
+
+        $zonePuchong = Zone::firstOrCreate(
+            ['name' => 'Puchong Riverside Demonstration Area'],
+            [
+                'postcode' => '47180',
+                'taman' => 'Bandar Kinrara',
+                'area_type' => AreaType::Mixed,
+                'socioeconomic_group' => SocioeconomicGroup::M40,
+                'responsible_party_id' => $dept->id,
+            ],
+        );
+
+        $zoneKapar = Zone::firstOrCreate(
+            ['name' => 'Kapar Demonstration Area'],
+            [
+                'postcode' => '42200',
+                'taman' => 'Batu 14',
+                'area_type' => AreaType::Industrial,
+                'socioeconomic_group' => SocioeconomicGroup::B40,
+                'responsible_party_id' => $partyContractor->id,
+            ],
+        );
+
+        $zoneSerendah = Zone::firstOrCreate(
+            ['name' => 'Serendah Demonstration Area'],
+            [
+                'postcode' => '48200',
+                'taman' => 'Antara Gapi',
+                'area_type' => AreaType::Residential,
+                'socioeconomic_group' => SocioeconomicGroup::M40,
+                'responsible_party_id' => $dept->id,
+            ],
+        );
+
+        $zoneKualaSelangor = Zone::firstOrCreate(
+            ['name' => 'Kuala Selangor Demonstration Area'],
+            [
+                'postcode' => '45000',
+                'taman' => 'Kampung Seri Sentosa',
+                'area_type' => AreaType::Mixed,
+                'socioeconomic_group' => SocioeconomicGroup::B40,
+                'responsible_party_id' => $dept->id,
+            ],
+        );
+
         $centreA = DisposalCentre::firstOrCreate(
             ['name' => 'Kundang Landfill'],
             [
@@ -211,6 +266,82 @@ class DatabaseSeeder extends Seeder
                 'risk_score' => 91,
                 'notes' => 'Detected via CCTV POC upload',
                 'submitted_at' => now()->subHour(),
+            ],
+            [
+                'reference' => 'RPT-DEMO0006',
+                'source' => ReportSource::Citizen,
+                'status' => ReportStatus::New,
+                'latitude' => 2.8668000,
+                'longitude' => 101.6837000,
+                'photos' => ['/demo/reports/dengkil-dumping.jpg'],
+                'reporter_name' => 'Demo reporter Dengkil',
+                'reporter_phone' => 'Demo contact',
+                'waste_category_id' => $categories[0]->id,
+                'zone_id' => $zoneDengkil->id,
+                'risk_score' => 86,
+                'notes' => 'Illustrative POC case referencing reported enforcement activity in Bukit Damar, Dengkil.',
+                'submitted_at' => now()->subHours(8),
+            ],
+            [
+                'reference' => 'RPT-DEMO0007',
+                'source' => ReportSource::Citizen,
+                'status' => ReportStatus::UnderReview,
+                'latitude' => 3.0339000,
+                'longitude' => 101.6143000,
+                'photos' => ['/demo/reports/puchong-dumping.jpg'],
+                'reporter_name' => 'Demo reporter Puchong',
+                'reporter_phone' => 'Demo contact',
+                'waste_category_id' => $categories[0]->id,
+                'zone_id' => $zonePuchong->id,
+                'risk_score' => 79,
+                'notes' => 'Illustrative POC case referencing reported dumping along Sungai Bohol, Puchong.',
+                'submitted_at' => now()->subHours(20),
+            ],
+            [
+                'reference' => 'RPT-DEMO0008',
+                'source' => ReportSource::Citizen,
+                'status' => ReportStatus::Assigned,
+                'latitude' => 3.1689000,
+                'longitude' => 101.4145000,
+                'photos' => ['/demo/reports/kapar-industrial.jpg'],
+                'reporter_name' => 'Demo reporter Kapar',
+                'reporter_phone' => 'Demo contact',
+                'waste_category_id' => $categories[2]->id,
+                'zone_id' => $zoneKapar->id,
+                'risk_score' => 91,
+                'notes' => 'Illustrative POC case referencing documented Kapar cleanup activity.',
+                'submitted_at' => now()->subDays(2),
+            ],
+            [
+                'reference' => 'RPT-DEMO0009',
+                'source' => ReportSource::Citizen,
+                'status' => ReportStatus::InProgress,
+                'latitude' => 3.3596000,
+                'longitude' => 101.6032000,
+                'photos' => ['/demo/reports/serendah-hotspot.jpg'],
+                'reporter_name' => 'Demo reporter Serendah',
+                'reporter_phone' => 'Demo contact',
+                'waste_category_id' => $categories[2]->id,
+                'zone_id' => $zoneSerendah->id,
+                'risk_score' => 68,
+                'notes' => 'Illustrative POC case referencing a council-cleared hotspot in Serendah.',
+                'submitted_at' => now()->subDays(3),
+            ],
+            [
+                'reference' => 'RPT-DEMO0010',
+                'source' => ReportSource::Citizen,
+                'status' => ReportStatus::Solved,
+                'latitude' => 3.3338000,
+                'longitude' => 101.2547000,
+                'photos' => ['/demo/reports/kuala-selangor-green-waste.jpg'],
+                'reporter_name' => 'Demo reporter Kuala Selangor',
+                'reporter_phone' => 'Demo contact',
+                'waste_category_id' => $categories[2]->id,
+                'zone_id' => $zoneKualaSelangor->id,
+                'risk_score' => 47,
+                'notes' => 'Illustrative POC case referencing a reported Kuala Selangor dumping location.',
+                'submitted_at' => now()->subDays(10),
+                'resolved_at' => now()->subDays(7),
             ],
         ];
 

@@ -22,9 +22,11 @@ class PotholeCaseResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedWrenchScrewdriver;
 
-    protected static ?string $navigationLabel = 'Pothole cases';
+    protected static ?string $navigationLabel = 'Cases';
 
-    protected static ?string $navigationParentItem = 'Operations overview';
+    protected static string|\UnitEnum|null $navigationGroup = 'Operations';
+
+    protected static ?string $navigationParentItem = 'Potholes';
 
     protected static ?int $navigationSort = 2;
 
