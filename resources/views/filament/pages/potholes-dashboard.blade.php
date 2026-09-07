@@ -63,7 +63,7 @@
                             <i class="swm-map-dot" style="background:#a84848"></i> GDP-led
                         </span>
                         <span class="swm-tip" tabindex="0" data-tip="Rakyat-led: dense residential / motorcycle lanes — spend lifts public satisfaction and rider safety (e.g. PJ, Subang).">
-                            <i class="swm-map-dot" style="background:#e8c547"></i> Rakyat-led
+                            <i class="swm-map-dot" style="background:#d2222b"></i> Rakyat-led
                         </span>
                         <span class="swm-tip" tabindex="0" data-tip="Balanced: arterial junctions — safety-led cases that help both rakyat commute and GDP logistics.">
                             <i class="swm-map-dot" style="background:#6b9b6e"></i> Balanced

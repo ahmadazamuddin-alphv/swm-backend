@@ -38,7 +38,7 @@
                 </div>
                 <div class="swm-map-legend" aria-label="Pothole map legend">
                     <span><i class="swm-map-dot" style="background:#a84848"></i>GDP-led impact</span>
-                    <span><i class="swm-map-dot" style="background:#e8c547"></i>Rakyat-led impact</span>
+                    <span><i class="swm-map-dot" style="background:#d2222b"></i>Rakyat-led impact</span>
                     <span><i class="swm-map-dot" style="background:#6b9b6e"></i>Balanced impact</span>
                 </div>
             @else
