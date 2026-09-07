@@ -7,6 +7,8 @@ use App\Filament\Pages\PotholesDashboard;
 use App\Filament\Pages\DistrictPriorityAnalytics;
 use App\Filament\Pages\ResponsePerformanceAnalytics;
 use App\Filament\Pages\HotspotHeatmapAnalytics;
+use App\Filament\Resources\CctvDetections\CctvDetectionResource;
+use App\Filament\Resources\PotholeCases\PotholeCaseResource;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -58,7 +60,7 @@ class AdminPanelProvider extends PanelProvider
                 NavigationItem::make('Illegal dumping')
                     ->group('Operations')
                     ->icon(Heroicon::OutlinedTrash)
-                    ->url(fn (): string => OperationsDashboard::getUrl(['service' => 'dumping']))
+                    ->url(fn (): string => CctvDetectionResource::getUrl('index'))
                     ->isActiveWhen(fn (): bool => (
                         request()->routeIs('filament.admin.pages.operations-dashboard')
                         && request()->query('service', 'dumping') === 'dumping'
@@ -71,7 +73,7 @@ class AdminPanelProvider extends PanelProvider
                 NavigationItem::make('Potholes')
                     ->group('Operations')
                     ->icon(Heroicon::OutlinedWrenchScrewdriver)
-                    ->url(fn (): string => OperationsDashboard::getUrl(['service' => 'potholes']))
+                    ->url(fn (): string => PotholeCaseResource::getUrl('index'))
                     ->isActiveWhen(fn (): bool => (
                         request()->routeIs('filament.admin.pages.operations-dashboard')
                         && request()->query('service') === 'potholes'
