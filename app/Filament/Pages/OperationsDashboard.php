@@ -69,14 +69,14 @@ class OperationsDashboard extends Dashboard
                 ->extraAttributes([
                     'class' => 'swm-service-toggle swm-service-toggle-dumping '.($this->service === 'dumping' ? 'swm-service-toggle-active' : ''),
                 ])
-                ->action(fn () => $this->switchService('dumping')),
+                ->url(static::getUrl(['service' => 'dumping'])),
             Action::make('showPotholes')
                 ->label('Potholes')
                 ->color($this->service === 'potholes' ? 'primary' : 'gray')
                 ->extraAttributes([
                     'class' => 'swm-service-toggle swm-service-toggle-potholes '.($this->service === 'potholes' ? 'swm-service-toggle-active' : ''),
                 ])
-                ->action(fn () => $this->switchService('potholes')),
+                ->url(static::getUrl(['service' => 'potholes'])),
             Action::make('simulateReport')
                 ->label('Simulate dumping report')
                 ->icon('heroicon-o-plus')

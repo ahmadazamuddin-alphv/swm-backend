@@ -77,6 +77,15 @@ class DatabaseSeeder extends Seeder
             ],
         );
 
+        $mphs = ResponsibleParty::updateOrCreate(
+            ['name' => 'Jabatan Pengurusan Sisa Pepejal dan Pembersihan Awam MPHS'],
+            [
+                'type' => PartyType::Department,
+                'phone' => '03-6064 1050',
+                'email' => 'jpsppa@mphs.gov.my',
+            ],
+        );
+
         $partyContractor = ResponsibleParty::firstOrCreate(
             ['name' => 'Alam Flora Ops Team'],
             [
@@ -153,14 +162,14 @@ class DatabaseSeeder extends Seeder
             ],
         );
 
-        $zoneSerendah = Zone::firstOrCreate(
+        $zoneSerendah = Zone::updateOrCreate(
             ['name' => 'Serendah Demonstration Area'],
             [
                 'postcode' => '48200',
                 'taman' => 'Antara Gapi',
                 'area_type' => AreaType::Residential,
                 'socioeconomic_group' => SocioeconomicGroup::M40,
-                'responsible_party_id' => $dept->id,
+                'responsible_party_id' => $mphs->id,
             ],
         );
 
