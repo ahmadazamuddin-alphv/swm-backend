@@ -61,10 +61,7 @@ class AdminPanelProvider extends PanelProvider
                     ->group('Operations')
                     ->icon(Heroicon::OutlinedTrash)
                     ->url(fn (): string => CctvDetectionResource::getUrl('index'))
-                    ->isActiveWhen(fn (): bool => (
-                        request()->routeIs('filament.admin.pages.operations-dashboard')
-                        && request()->query('service', 'dumping') === 'dumping'
-                    ) || request()->routeIs(
+                    ->isActiveWhen(fn (): bool => request()->routeIs(
                         'filament.admin.resources.cctv-detections.*',
                         'filament.admin.resources.reports.*',
                         'filament.admin.resources.assignments.*',
@@ -74,10 +71,7 @@ class AdminPanelProvider extends PanelProvider
                     ->group('Operations')
                     ->icon(Heroicon::OutlinedWrenchScrewdriver)
                     ->url(fn (): string => PotholeCaseResource::getUrl('index'))
-                    ->isActiveWhen(fn (): bool => (
-                        request()->routeIs('filament.admin.pages.operations-dashboard')
-                        && request()->query('service') === 'potholes'
-                    ) || request()->routeIs(
+                    ->isActiveWhen(fn (): bool => request()->routeIs(
                         'filament.admin.pages.potholes',
                         'filament.admin.resources.pothole-cases.*',
                     ))
