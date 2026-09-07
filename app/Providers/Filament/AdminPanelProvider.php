@@ -58,10 +58,27 @@ class AdminPanelProvider extends PanelProvider
                 NavigationItem::make('Illegal dumping')
                     ->group('Operations')
                     ->icon(Heroicon::OutlinedTrash)
+                    ->url(fn (): string => OperationsDashboard::getUrl(['service' => 'dumping']))
+                    ->isActiveWhen(fn (): bool => (
+                        request()->routeIs('filament.admin.pages.operations-dashboard')
+                        && request()->query('service', 'dumping') === 'dumping'
+                    ) || request()->routeIs(
+                        'filament.admin.resources.cctv-detections.*',
+                        'filament.admin.resources.reports.*',
+                        'filament.admin.resources.assignments.*',
+                    ))
                     ->sort(1),
                 NavigationItem::make('Potholes')
                     ->group('Operations')
                     ->icon(Heroicon::OutlinedWrenchScrewdriver)
+                    ->url(fn (): string => OperationsDashboard::getUrl(['service' => 'potholes']))
+                    ->isActiveWhen(fn (): bool => (
+                        request()->routeIs('filament.admin.pages.operations-dashboard')
+                        && request()->query('service') === 'potholes'
+                    ) || request()->routeIs(
+                        'filament.admin.pages.potholes',
+                        'filament.admin.resources.pothole-cases.*',
+                    ))
                     ->sort(2),
             ])
             ->brandName('Siaga Selangor')

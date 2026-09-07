@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\PotholeCases\Pages;
 
-use App\Filament\Pages\PotholesDashboard;
+use App\Filament\Pages\OperationsDashboard;
 use App\Filament\Resources\PotholeCases\PotholeCaseResource;
 use App\Services\PotholeBudgetService;
 use Filament\Actions\Action;
@@ -22,7 +22,7 @@ class ViewPotholeCase extends ViewRecord
             Action::make('dashboard')
                 ->label('Potholes dashboard')
                 ->color('gray')
-                ->url(PotholesDashboard::getUrl()),
+                ->url(OperationsDashboard::getUrl(['service' => 'potholes'])),
             EditAction::make(),
         ];
     }
